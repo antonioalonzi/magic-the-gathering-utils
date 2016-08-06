@@ -12,7 +12,7 @@ public class Main {
      *   All the other arguments represent the arguments for that utility.
      */
     public static void main(String[] args) {
-        String arg0 = "generate-random-booster";
+        String arg0 = "generate-booster";
 
         new Main().run(arg0);
     }

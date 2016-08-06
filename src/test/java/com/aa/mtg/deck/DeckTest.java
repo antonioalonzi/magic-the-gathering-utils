@@ -6,9 +6,10 @@ import com.aa.mtg.deck.shuffler.DeckShuffler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,23 +21,25 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = MainConfiguration.class, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {DeckTest.DeckTestConfiguration.class})
 public class DeckTest {
 
     @Autowired
     private DeckFactory deckFactory;
 
+    @Autowired
+    private DeckShuffler shufflerMock;
+
     @Test
     public void shouldCreateAndDrawCards() throws Exception {
         // create a deck with four cards and a shuffler
-        DeckShuffler shufflerMock = mock(DeckShuffler.class);
         ArrayList<Card> deckCards = newArrayList(
                 ABBOT_OF_KERAL_KEEP,
                 DWYEN_GILT_LEAF_DEAN,
                 SWAMP,
                 SWAMP
         );
-        Deck deck = deckFactory.createDeck(deckCards, shufflerMock);
+        Deck deck = deckFactory.createDeck(deckCards);
 
         // assert its size and that was shuffled
         verify(shufflerMock).shuffle(deck.getCards());
@@ -55,5 +58,14 @@ public class DeckTest {
 
         // assert that size is 0
         assertThat(deck.size()).isEqualTo(0);
+    }
+
+    @Configuration
+    static class DeckTestConfiguration extends MainConfiguration {
+        @Bean
+        @Override
+        public DeckShuffler javaCollectionsDeckShuffler() {
+            return mock(DeckShuffler.class);
+        }
     }
 }
