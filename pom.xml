@@ -10,6 +10,12 @@
             <artifactId>commons-csv</artifactId>
             <version>1.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.2.RELEASE</version>
+        </dependency>
+
 
         <!-- Test dependencies -->
         <dependency>
@@ -29,6 +35,12 @@
             <artifactId>assertj-core</artifactId>
             <version>3.5.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.2.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
 </project>

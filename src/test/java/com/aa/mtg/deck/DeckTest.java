@@ -1,8 +1,14 @@
 package com.aa.mtg.deck;
 
+import com.aa.mtg.MainConfiguration;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.deck.shuffler.DeckShuffler;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +19,12 @@ import static org.assertj.core.util.Lists.newArrayList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = MainConfiguration.class, loader = AnnotationConfigContextLoader.class)
 public class DeckTest {
+
+    @Autowired
+    private DeckFactory deckFactory;
 
     @Test
     public void shouldCreateAndDrawCards() throws Exception {
@@ -25,7 +36,7 @@ public class DeckTest {
                 SWAMP,
                 SWAMP
         );
-        Deck deck = new Deck(deckCards, shufflerMock);
+        Deck deck = deckFactory.createDeck(deckCards, shufflerMock);
 
         // assert its size and that was shuffled
         verify(shufflerMock).shuffle(deck.getCards());
