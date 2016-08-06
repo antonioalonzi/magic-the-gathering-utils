@@ -1,22 +1,22 @@
-package com.aa.mtg.deckbox.card;
+package com.aa.mtg.card;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.aa.mtg.deckbox.card.Rarity.COMMON;
-import static com.aa.mtg.deckbox.card.Rarity.MYTHIC_RARE;
-import static com.aa.mtg.deckbox.card.Rarity.RARE;
-import static com.aa.mtg.deckbox.card.Rarity.UNCOMMON;
-import static com.aa.mtg.deckbox.card.Type.ARTIFACT;
-import static com.aa.mtg.deckbox.card.Type.BASIC_LAND;
-import static com.aa.mtg.deckbox.card.Type.CREATURE;
-import static com.aa.mtg.deckbox.card.Type.ENCHANTMENT;
-import static com.aa.mtg.deckbox.card.Type.INSTANT;
-import static com.aa.mtg.deckbox.card.Type.LAND;
-import static com.aa.mtg.deckbox.card.Type.LEGENDARY_CREATURE;
-import static com.aa.mtg.deckbox.card.Type.PLANESWALKER;
-import static com.aa.mtg.deckbox.card.Type.SORCERY;
+import static com.aa.mtg.card.Rarity.COMMON;
+import static com.aa.mtg.card.Rarity.MYTHIC_RARE;
+import static com.aa.mtg.card.Rarity.RARE;
+import static com.aa.mtg.card.Rarity.UNCOMMON;
+import static com.aa.mtg.card.Type.ARTIFACT;
+import static com.aa.mtg.card.Type.BASIC_LAND;
+import static com.aa.mtg.card.Type.CREATURE;
+import static com.aa.mtg.card.Type.ENCHANTMENT;
+import static com.aa.mtg.card.Type.INSTANT;
+import static com.aa.mtg.card.Type.LAND;
+import static com.aa.mtg.card.Type.LEGENDARY_CREATURE;
+import static com.aa.mtg.card.Type.PLANESWALKER;
+import static com.aa.mtg.card.Type.SORCERY;
 
 public class CardBuilder {
 

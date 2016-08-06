@@ -1,4 +1,4 @@
-package com.aa.mtg.deckbox.card;
+package com.aa.mtg.card;
 
 import java.util.List;
 

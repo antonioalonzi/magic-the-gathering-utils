@@ -1,6 +1,6 @@
 package com.aa.mtg.deckbox.parsers;
 
-import com.aa.mtg.deckbox.card.Card;
+import com.aa.mtg.card.Card;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.aa.mtg.deckbox.card.CardBuilder.cardBuilder;
+import static com.aa.mtg.card.CardBuilder.cardBuilder;
 
 public class CardListCsvParser {
 
