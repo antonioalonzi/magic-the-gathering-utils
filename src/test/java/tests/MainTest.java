@@ -1,4 +1,4 @@
-package com.aa.mtg;
+package tests;
 
 public class MainTest {
 

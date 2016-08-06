@@ -11,11 +11,11 @@ public class Deck {
 
     private final List<Card> cards;
 
-    public Deck(List<Card> cards) {
+    Deck(List<Card> cards) {
         this.cards = cards;
     }
 
-    public void shuffle() {
+    void shuffle() {
         shuffler.shuffle(cards);
     }
 
@@ -29,9 +29,5 @@ public class Deck {
 
     void setShuffler(DeckShuffler shuffler) {
         this.shuffler = shuffler;
-    }
-
-    List<Card> getCards() {
-        return cards;
     }
 }

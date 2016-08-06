@@ -3,7 +3,7 @@ package com.aa.mtg;
 import com.aa.mtg.deck.DeckFactory;
 import com.aa.mtg.deck.shuffler.DeckShuffler;
 import com.aa.mtg.deck.shuffler.JavaCollectionsDeckShuffler;
-import com.aa.mtg.playingsetgenerators.BoosterGenerator;
+import com.aa.mtg.playingset.generators.BoosterGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

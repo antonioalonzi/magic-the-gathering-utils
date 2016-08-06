@@ -7,15 +7,15 @@ import java.util.List;
 
 public class DeckFactory {
 
-    private final DeckShuffler defaultDeckShuffler;
+    private final DeckShuffler deckShuffler;
 
     public DeckFactory(DeckShuffler deckShuffler) {
-        this.defaultDeckShuffler = deckShuffler;
+        this.deckShuffler = deckShuffler;
     }
 
     public Deck createDeck(List<Card> cards) {
         Deck deck = new Deck(cards);
-        deck.setShuffler(defaultDeckShuffler);
+        deck.setShuffler(deckShuffler);
         deck.shuffle();
         return deck;
     }
