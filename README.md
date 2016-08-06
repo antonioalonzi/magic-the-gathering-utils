@@ -1,2 +1,15 @@
-# magic-the-gathering-utils
-A set of utils functions that helps you organizing your card collection and playing Magic: The Gathering
+# Magic: The Gathering Utils (magic-the-gathering-utils)
+
+
+
+## General Info
+
+This project contains a set of utilities that help you organizing your card collection and playing 
+**Magic: The Gathering** with your friends.
+
+
+
+## Features
+
+ * Extracting your card collection from [deckbox](https://deckbox.org)
+
