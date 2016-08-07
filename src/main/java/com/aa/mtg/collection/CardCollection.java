@@ -15,4 +15,8 @@ public class CardCollection {
     public List<Card> getCardList() {
         return cardList;
     }
+
+    public void removeCards(List<Card> cardList) {
+        cardList.forEach(this.cardList::remove);
+    }
 }

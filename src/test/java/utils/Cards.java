@@ -2,6 +2,9 @@ package utils;
 
 import com.aa.mtg.card.Card;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.aa.mtg.card.CardBuilder.cardBuilder;
 import static com.aa.mtg.card.Rarity.*;
 import static com.aa.mtg.card.Type.*;
@@ -21,4 +24,13 @@ public class Cards {
     public static final Card SWAMP = cardBuilder().name("Swamp").ofTypes(LAND).rarity(BASIC_LAND).build();
     public static final Card TEMPLE_OF_DECEIT = cardBuilder().name("Temple of Deceit").ofTypes(LAND).rarity(RARE).build();
 
+    public static List<Card> nCards(Card card, int nCopies) {
+        ArrayList<Card> cards = new ArrayList<>();
+
+        for (int i = 0; i < nCopies; i++) {
+            cards.add(card);
+        }
+
+        return cards;
+    }
 }

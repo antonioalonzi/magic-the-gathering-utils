@@ -23,10 +23,14 @@ public class BoosterGenerator {
         this.cardsShuffler = cardsShuffler;
     }
 
-    public List<Booster> generateBoosters(CardCollection cardCollection, int i) {
+    public List<Booster> generateBoosters(CardCollection cardCollection, int numOfBoosters) {
         ArrayList<Booster> boosters = new ArrayList<>();
 
-        boosters.add(generateBooster(cardCollection));
+        for (int i = 0; i < numOfBoosters; i++) {
+            Booster booster = generateBooster(cardCollection);
+            cardCollection.removeCards(booster.getCardList());
+            boosters.add(booster);
+        }
 
         return boosters;
     }

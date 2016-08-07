@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {MainTestConfiguration.class})
-public class BoosterGenerator {
+public class BoosterGeneratorAcceptanceTest {
 
     @Autowired
     private Main main;
@@ -28,7 +28,7 @@ public class BoosterGenerator {
     @Test
     public void shouldGenerateABooster() throws Exception {
         // generate a booster for a collection with one card per rarity type
-        String cardCollectionPath = BoosterGenerator.class.getResource("/playingset/generator/card-collection.csv").getPath();
+        String cardCollectionPath = BoosterGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
         main.run("booster-generator", cardCollectionPath);
 
         // assert that there 1 rare, 3 uncommons, 10 common, 1 basic land.
@@ -53,7 +53,6 @@ public class BoosterGenerator {
                 " - Swamp\n" +
                 "\n"
         );
-
     }
 
 }
