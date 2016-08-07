@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.util.List;
 
 import static com.aa.mtg.playingset.generator.BoostersGenerator.BOOSTER_GENERATOR_COMMAND;
+import static java.lang.Integer.parseInt;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
@@ -38,13 +39,13 @@ public class Main implements CommandLineRunner {
      *   All the other arguments represent the arguments for that utility.
      */
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "~/Downloads/allMyCards.csv");
+        SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "/home/antonio/Downloads/allMyCards.csv", "");
     }
 
     public void run(String... args) throws Exception {
         if (args[0].equals(BOOSTER_GENERATOR_COMMAND)) {
             CardsCollection cardsCollection = cardsListParser.parse(new FileInputStream(args[1]));
-            List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, 1);
+            List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, parseInt(args[2]));
             console.print(BoosterConsoleHelper.toString(boosters));
         }
     }
