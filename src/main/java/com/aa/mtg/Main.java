@@ -39,7 +39,7 @@ public class Main implements CommandLineRunner {
      *   All the other arguments represent the arguments for that utility.
      */
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "/home/antonio/Downloads/allMyCards.csv", "");
+        SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "/home/antonio/Downloads/allMyCards.csv", "6");
     }
 
     public void run(String... args) throws Exception {
