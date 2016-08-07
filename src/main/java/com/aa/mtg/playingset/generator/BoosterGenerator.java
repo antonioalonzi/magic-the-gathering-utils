@@ -11,6 +11,14 @@ public class BoosterGenerator {
     public static final String BOOSTER_GENERATOR_COMMAND = "booster-generator";
 
     public List<Booster> generateBoosters(CardCollection cardCollection, int i) {
-        return new ArrayList<Booster>();
+        ArrayList<Booster> boosters = new ArrayList<>();
+
+        boosters.add(generateBooster(cardCollection));
+
+        return boosters;
+    }
+
+    private Booster generateBooster(CardCollection cardCollection) {
+        return null;
     }
 }

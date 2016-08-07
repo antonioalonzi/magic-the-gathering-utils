@@ -2,8 +2,8 @@ package com.aa.mtg;
 
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deck.DeckFactory;
-import com.aa.mtg.deck.shuffler.DeckShuffler;
-import com.aa.mtg.deck.shuffler.JavaCollectionsDeckShuffler;
+import com.aa.mtg.shuffler.CardsShuffler;
+import com.aa.mtg.shuffler.JavaCollectionsDeckShuffler;
 import com.aa.mtg.deckbox.parser.CardListCsvParser;
 import com.aa.mtg.deckbox.parser.CardListParser;
 import com.aa.mtg.playingset.generator.BoosterGenerator;
@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Configuration;
 public class MainConfiguration {
 
     @Bean
-    public DeckShuffler javaCollectionsDeckShuffler() {
+    public CardsShuffler javaCollectionsDeckShuffler() {
         return new JavaCollectionsDeckShuffler();
     }
 
     @Bean
-    public DeckFactory deckFactory(DeckShuffler deckShuffler) {
-        return new DeckFactory(deckShuffler);
+    public DeckFactory deckFactory(CardsShuffler cardsShuffler) {
+        return new DeckFactory(cardsShuffler);
     }
 
     @Bean

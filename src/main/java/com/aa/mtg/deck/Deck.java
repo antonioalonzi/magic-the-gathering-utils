@@ -1,13 +1,13 @@
 package com.aa.mtg.deck;
 
 import com.aa.mtg.card.Card;
-import com.aa.mtg.deck.shuffler.DeckShuffler;
+import com.aa.mtg.shuffler.CardsShuffler;
 
 import java.util.List;
 
 public class Deck {
 
-    private DeckShuffler shuffler;
+    private CardsShuffler shuffler;
 
     private final List<Card> cards;
 
@@ -27,7 +27,7 @@ public class Deck {
         return cards.size();
     }
 
-    void setShuffler(DeckShuffler shuffler) {
+    void setShuffler(CardsShuffler shuffler) {
         this.shuffler = shuffler;
     }
 }

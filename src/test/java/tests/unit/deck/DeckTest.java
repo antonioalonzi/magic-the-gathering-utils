@@ -3,7 +3,7 @@ package tests.unit.deck;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.deck.Deck;
 import com.aa.mtg.deck.DeckFactory;
-import com.aa.mtg.deck.shuffler.DeckShuffler;
+import com.aa.mtg.shuffler.CardsShuffler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class DeckTest {
     private DeckFactory deckFactory;
 
     @Autowired
-    private DeckShuffler shufflerMock;
+    private CardsShuffler shufflerMock;
 
     @Test
     public void shouldCreateAndDrawCards() throws Exception {
@@ -65,13 +65,13 @@ public class DeckTest {
     static class DeckTestConfiguration {
 
         @Bean
-        public DeckShuffler mockDeckShuffler() {
-            return mock(DeckShuffler.class);
+        public CardsShuffler mockCardsShuffler() {
+            return mock(CardsShuffler.class);
         }
 
         @Bean
-        public DeckFactory deckFactory(DeckShuffler deckShuffler) {
-            return new DeckFactory(deckShuffler);
+        public DeckFactory deckFactory(CardsShuffler cardsShuffler) {
+            return new DeckFactory(cardsShuffler);
         }
 
     }
