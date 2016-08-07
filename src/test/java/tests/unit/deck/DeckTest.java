@@ -1,4 +1,4 @@
-package tests.integration.deck;
+package tests.unit.deck;
 
 import com.aa.mtg.card.Card;
 import com.aa.mtg.deck.Deck;
@@ -47,7 +47,7 @@ public class DeckTest {
         assertThat(deck.size()).isEqualTo(4);
 
         // extract one card and assert that the size decreased
-        List<Card> extractedCards = new ArrayList<Card>();
+        List<Card> extractedCards = new ArrayList<>();
         extractedCards.add(deck.draw());
         assertThat(deck.size()).isEqualTo(3);
 

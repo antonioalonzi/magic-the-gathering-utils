@@ -12,4 +12,6 @@ This project contains a set of utilities that help you organizing your card coll
 ## Features
 
  * Extracting your card collection from [deckbox](https://deckbox.org)
+ * Generating random Booster from your collection
+
 

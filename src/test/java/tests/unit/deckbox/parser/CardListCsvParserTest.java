@@ -1,12 +1,11 @@
 package tests.unit.deckbox.parser;
 
-import com.aa.mtg.card.Card;
+import com.aa.mtg.collection.CardCollection;
 import com.aa.mtg.deckbox.parser.CardListCsvParser;
-import utils.Cards;
 import org.junit.Test;
+import utils.Cards;
 
 import java.io.InputStream;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,10 +17,10 @@ public class CardListCsvParserTest {
         InputStream fileInputStream = CardListCsvParserTest.class.getResourceAsStream("/deckbox/parser/extracted-file.csv");
 
         // when
-        List<Card> cardList = new CardListCsvParser().parse(fileInputStream);
+        CardCollection cardCollection = new CardListCsvParser().parse(fileInputStream);
 
         // then
-        assertThat(cardList).containsExactly(
+        assertThat(cardCollection.getCardList()).containsExactly(
                 Cards.ABBOT_OF_KERAL_KEEP,
                 Cards.ACCURSED_SPIRIT,
                 Cards.ACT_OF_TREASON,

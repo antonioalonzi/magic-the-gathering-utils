@@ -14,6 +14,14 @@ public class Card {
         this.rarity = rarity;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Rarity getRarity() {
+        return rarity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
