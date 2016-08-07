@@ -13,13 +13,13 @@ import static com.aa.mtg.card.Rarity.*;
 import static com.aa.mtg.collection.search.CardFinder.search;
 import static com.aa.mtg.collection.search.filter.RarityFilter.rarity;
 
-public class BoosterGenerator {
+public class BoostersGenerator {
 
     public static final String BOOSTER_GENERATOR_COMMAND = "booster-generator";
 
     private final CardsShuffler cardsShuffler;
 
-    public BoosterGenerator(CardsShuffler cardsShuffler) {
+    public BoostersGenerator(CardsShuffler cardsShuffler) {
         this.cardsShuffler = cardsShuffler;
     }
 

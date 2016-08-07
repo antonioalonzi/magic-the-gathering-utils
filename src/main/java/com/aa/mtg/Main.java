@@ -2,10 +2,10 @@ package com.aa.mtg;
 
 import com.aa.mtg.booster.Booster;
 import com.aa.mtg.booster.BoosterConsoleHelper;
-import com.aa.mtg.collection.CardCollection;
+import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardListParser;
-import com.aa.mtg.playingset.generator.BoosterGenerator;
+import com.aa.mtg.playingset.generator.BoostersGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,18 +13,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.FileInputStream;
 import java.util.List;
 
-import static com.aa.mtg.playingset.generator.BoosterGenerator.BOOSTER_GENERATOR_COMMAND;
+import static com.aa.mtg.playingset.generator.BoostersGenerator.BOOSTER_GENERATOR_COMMAND;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
     private final CardListParser cardListParser;
-    private final BoosterGenerator boosterGenerator;
+    private final BoostersGenerator boostersGenerator;
     private final Console console;
 
-    public Main(CardListParser cardListParser, BoosterGenerator boosterGenerator, Console console) {
+    public Main(CardListParser cardListParser, BoostersGenerator boostersGenerator, Console console) {
         this.cardListParser = cardListParser;
-        this.boosterGenerator = boosterGenerator;
+        this.boostersGenerator = boostersGenerator;
         this.console = console;
     }
 
@@ -43,8 +43,8 @@ public class Main implements CommandLineRunner {
 
     public void run(String... args) throws Exception {
         if (args[0].equals(BOOSTER_GENERATOR_COMMAND)) {
-            CardCollection cardCollection = cardListParser.parse(new FileInputStream(args[1]));
-            List<Booster> boosters = boosterGenerator.generateBoosters(cardCollection, 1);
+            CardsCollection cardsCollection = cardListParser.parse(new FileInputStream(args[1]));
+            List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, 1);
             console.print(BoosterConsoleHelper.toString(boosters));
         }
     }

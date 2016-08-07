@@ -3,7 +3,7 @@ package tests.unit.playingset.generator;
 import com.aa.mtg.booster.Booster;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.collection.CardsCollection;
-import com.aa.mtg.playingset.generator.BoosterGenerator;
+import com.aa.mtg.playingset.generator.BoostersGenerator;
 import com.aa.mtg.shuffler.CardsShuffler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,10 +21,10 @@ import static org.mockito.Mockito.verify;
 import static utils.Cards.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BoosterGeneratorTest {
+public class BoostersGeneratorTest {
 
     @InjectMocks
-    private BoosterGenerator boosterGenerator;
+    private BoostersGenerator boostersGenerator;
 
     @Mock
     private CardsShuffler cardsShuffler;
@@ -41,7 +41,7 @@ public class BoosterGeneratorTest {
 
         // When
         int numOfBoosters = 2;
-        List<Booster> boosters = boosterGenerator.generateBoosters(cardsCollection, numOfBoosters);
+        List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, numOfBoosters);
 
         // Then: deck has been shuffled before each card selection
         int numOfShufflePerBooster = 4; // one for each rarity: MythicRare/Rare, Uncommon, Common, BasicLand
