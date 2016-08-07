@@ -3,7 +3,7 @@ package com.aa.mtg.playingset.generator;
 import com.aa.mtg.booster.Booster;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.card.Rarity;
-import com.aa.mtg.collection.CardCollection;
+import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.shuffler.CardsShuffler;
 
 import java.util.ArrayList;
@@ -23,33 +23,33 @@ public class BoosterGenerator {
         this.cardsShuffler = cardsShuffler;
     }
 
-    public List<Booster> generateBoosters(CardCollection cardCollection, int numOfBoosters) {
+    public List<Booster> generateBoosters(CardsCollection cardsCollection, int numOfBoosters) {
         ArrayList<Booster> boosters = new ArrayList<>();
 
         for (int i = 0; i < numOfBoosters; i++) {
-            Booster booster = generateBooster(cardCollection);
-            cardCollection.removeCards(booster.getCardList());
+            Booster booster = generateBooster(cardsCollection);
+            cardsCollection.removeCards(booster.getCardList());
             boosters.add(booster);
         }
 
         return boosters;
     }
 
-    private Booster generateBooster(CardCollection cardCollection) {
+    private Booster generateBooster(CardsCollection cardsCollection) {
         List<Card> boosterCards = new ArrayList<>();
 
-        boosterCards.addAll(selectNCardsByRarity(cardCollection, 1, MYTHIC_RARE, RARE));
-        boosterCards.addAll(selectNCardsByRarity(cardCollection, 3, UNCOMMON));
-        boosterCards.addAll(selectNCardsByRarity(cardCollection, 10, COMMON));
-        boosterCards.addAll(selectNCardsByRarity(cardCollection, 1, BASIC_LAND));
+        boosterCards.addAll(selectNCardsByRarity(cardsCollection, 1, MYTHIC_RARE, RARE));
+        boosterCards.addAll(selectNCardsByRarity(cardsCollection, 3, UNCOMMON));
+        boosterCards.addAll(selectNCardsByRarity(cardsCollection, 10, COMMON));
+        boosterCards.addAll(selectNCardsByRarity(cardsCollection, 1, BASIC_LAND));
 
         return new Booster(boosterCards);
     }
 
-    private List<Card> selectNCardsByRarity(CardCollection cardCollection, int n, Rarity...rarity) {
+    private List<Card> selectNCardsByRarity(CardsCollection cardsCollection, int n, Rarity...rarity) {
         List<Card> selectedCards = new ArrayList<>(n);
 
-        List<Card> allCardsByRarity = search(cardCollection)
+        List<Card> allCardsByRarity = search(cardsCollection)
                 .by(rarity(rarity))
                 .fetchAll();
 

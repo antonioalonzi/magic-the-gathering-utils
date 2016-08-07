@@ -28,8 +28,8 @@ public class BoosterGeneratorAcceptanceTest {
     @Test
     public void shouldGenerateABooster() throws Exception {
         // generate a booster for a collection with one card per rarity type
-        String cardCollectionPath = BoosterGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
-        main.run("booster-generator", cardCollectionPath);
+        String cardsCollectionPath = BoosterGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
+        main.run("booster-generator", cardsCollectionPath);
 
         // assert that there 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());

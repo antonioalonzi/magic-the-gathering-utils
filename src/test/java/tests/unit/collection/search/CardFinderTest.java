@@ -1,7 +1,7 @@
 package tests.unit.collection.search;
 
 import com.aa.mtg.card.Card;
-import com.aa.mtg.collection.CardCollection;
+import com.aa.mtg.collection.CardsCollection;
 import org.junit.Test;
 
 import java.util.List;
@@ -20,14 +20,14 @@ public class CardFinderTest {
     @Test
     public void searchRareCards() throws Exception {
         // Given
-        CardCollection cardCollection = new CardCollection(newArrayList(
+        CardsCollection cardsCollection = new CardsCollection(newArrayList(
                 ABBOT_OF_KERAL_KEEP,
                 ACCURSED_SPIRIT,
                 HANGARBACK_WALKER
         ));
 
         // When
-        List<Card> cards = search(cardCollection)
+        List<Card> cards = search(cardsCollection)
                 .by(rarity(RARE))
                 .fetchAll();
 
@@ -38,7 +38,7 @@ public class CardFinderTest {
     @Test
     public void searchRareOrMythicCards() throws Exception {
         // Given
-        CardCollection cardCollection = new CardCollection(newArrayList(
+        CardsCollection cardsCollection = new CardsCollection(newArrayList(
                 ABBOT_OF_KERAL_KEEP,
                 ACCURSED_SPIRIT,
                 HANGARBACK_WALKER,
@@ -46,7 +46,7 @@ public class CardFinderTest {
         ));
 
         // When
-        List<Card> cards = search(cardCollection)
+        List<Card> cards = search(cardsCollection)
                 .by(rarity(RARE, MYTHIC_RARE))
                 .fetchAll();
 
@@ -57,14 +57,14 @@ public class CardFinderTest {
     @Test
     public void searchCardsByTextAndRarity() throws Exception {
         // Given
-        CardCollection cardCollection = new CardCollection(newArrayList(
+        CardsCollection cardsCollection = new CardsCollection(newArrayList(
                 ABBOT_OF_KERAL_KEEP,
                 ACCURSED_SPIRIT,
                 HANGARBACK_WALKER
         ));
 
         // When
-        List<Card> cards = search(cardCollection)
+        List<Card> cards = search(cardsCollection)
                 .by(rarity(RARE))
                 .and(name("c"))
                 .fetchAll();
@@ -75,13 +75,13 @@ public class CardFinderTest {
 
     @Test(expected = RuntimeException.class)
     public void errorWhenConstructingAndWithoutBy() throws Exception {
-        search(new CardCollection(newArrayList()))
+        search(new CardsCollection(newArrayList()))
                 .and(rarity(RARE));
     }
 
     @Test(expected = RuntimeException.class)
     public void errorWhenCallingTwiceBy() throws Exception {
-        search(new CardCollection(newArrayList()))
+        search(new CardsCollection(newArrayList()))
                 .by(rarity(RARE))
                 .by(rarity(RARE));
     }

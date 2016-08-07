@@ -1,11 +1,11 @@
 package com.aa.mtg.booster;
 
 import com.aa.mtg.card.Card;
-import com.aa.mtg.collection.CardCollection;
+import com.aa.mtg.collection.CardsCollection;
 
 import java.util.List;
 
-public class Booster extends CardCollection {
+public class Booster extends CardsCollection {
 
     public Booster(List<Card> cardList) {
         super(cardList);

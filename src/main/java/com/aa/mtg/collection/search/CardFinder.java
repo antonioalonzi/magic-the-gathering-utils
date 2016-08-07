@@ -1,7 +1,7 @@
 package com.aa.mtg.collection.search;
 
 import com.aa.mtg.card.Card;
-import com.aa.mtg.collection.CardCollection;
+import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.collection.search.filter.SearchFilter;
 
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import java.util.stream.Stream;
 public class CardFinder {
 
     private List<SearchFilter> filters;
-    private CardCollection cardCollection;
+    private CardsCollection cardsCollection;
 
-    private CardFinder(CardCollection cardCollection) {
-        this.cardCollection = cardCollection;
+    private CardFinder(CardsCollection cardsCollection) {
+        this.cardsCollection = cardsCollection;
         this.filters = new ArrayList<>();
     }
 
@@ -37,12 +37,12 @@ public class CardFinder {
         return this;
     }
 
-    public static CardFinder search(CardCollection cardCollection) {
-        return new CardFinder(cardCollection);
+    public static CardFinder search(CardsCollection cardsCollection) {
+        return new CardFinder(cardsCollection);
     }
 
     public List<Card> fetchAll() {
-        Stream<Card> stream = cardCollection.getCardList().stream();
+        Stream<Card> stream = cardsCollection.getCardList().stream();
 
         for (SearchFilter filter : filters) {
             stream = stream.filter(filter);

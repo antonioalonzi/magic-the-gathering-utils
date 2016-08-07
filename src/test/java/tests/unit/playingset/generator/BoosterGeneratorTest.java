@@ -2,7 +2,7 @@ package tests.unit.playingset.generator;
 
 import com.aa.mtg.booster.Booster;
 import com.aa.mtg.card.Card;
-import com.aa.mtg.collection.CardCollection;
+import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.playingset.generator.BoosterGenerator;
 import com.aa.mtg.shuffler.CardsShuffler;
 import org.junit.Test;
@@ -37,11 +37,11 @@ public class BoosterGeneratorTest {
         cardList.addAll(nCards(SKYRIDER_ELF, 100));
         cardList.addAll(nCards(ACCURSED_SPIRIT, 100));
         cardList.addAll(nCards(SWAMP, 100));
-        CardCollection cardCollection = new CardCollection(cardList);
+        CardsCollection cardsCollection = new CardsCollection(cardList);
 
         // When
         int numOfBoosters = 2;
-        List<Booster> boosters = boosterGenerator.generateBoosters(cardCollection, numOfBoosters);
+        List<Booster> boosters = boosterGenerator.generateBoosters(cardsCollection, numOfBoosters);
 
         // Then: deck has been shuffled before each card selection
         int numOfShufflePerBooster = 4; // one for each rarity: MythicRare/Rare, Uncommon, Common, BasicLand
@@ -53,6 +53,6 @@ public class BoosterGeneratorTest {
         assertThat(boosters.get(1).getCardList()).hasSize(15);
 
         // And: Collection has been reduced of 30 cards
-        assertThat(cardCollection.getCardList()).hasSize(370);
+        assertThat(cardsCollection.getCardList()).hasSize(370);
     }
 }

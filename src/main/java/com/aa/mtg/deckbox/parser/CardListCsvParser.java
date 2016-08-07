@@ -1,7 +1,7 @@
 package com.aa.mtg.deckbox.parser;
 
 import com.aa.mtg.card.Card;
-import com.aa.mtg.collection.CardCollection;
+import com.aa.mtg.collection.CardsCollection;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
@@ -15,7 +15,7 @@ import static com.aa.mtg.card.CardBuilder.cardBuilder;
 
 public class CardListCsvParser implements CardListParser {
 
-    public CardCollection parse(InputStream fileInputStream) throws IOException {
+    public CardsCollection parse(InputStream fileInputStream) throws IOException {
         List<Card> cardList = new ArrayList<>();
 
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(new InputStreamReader(fileInputStream));
@@ -36,6 +36,6 @@ public class CardListCsvParser implements CardListParser {
             }
         }
 
-        return new CardCollection(cardList);
+        return new CardsCollection(cardList);
     }
 }

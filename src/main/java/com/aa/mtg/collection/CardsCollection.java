@@ -4,11 +4,11 @@ import com.aa.mtg.card.Card;
 
 import java.util.List;
 
-public class CardCollection {
+public class CardsCollection {
 
     private final List<Card> cardList;
 
-    public CardCollection(List<Card> cardList) {
+    public CardsCollection(List<Card> cardList) {
         this.cardList = cardList;
     }
 
