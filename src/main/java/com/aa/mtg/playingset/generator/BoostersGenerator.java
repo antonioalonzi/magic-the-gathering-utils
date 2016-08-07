@@ -7,11 +7,14 @@ import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.shuffler.CardsShuffler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static com.aa.mtg.card.Rarity.*;
 import static com.aa.mtg.collection.search.CardFinder.search;
 import static com.aa.mtg.collection.search.filter.RarityFilter.rarity;
+import static java.util.Arrays.asList;
 
 public class BoostersGenerator {
 
@@ -46,7 +49,7 @@ public class BoostersGenerator {
         return new Booster(boosterCards);
     }
 
-    private List<Card> selectNCardsByRarity(CardsCollection cardsCollection, int n, Rarity...rarity) {
+    private List<Card> selectNCardsByRarity(CardsCollection cardsCollection, int n, Rarity...rarity) throws NoSuchElementException {
         List<Card> selectedCards = new ArrayList<>(n);
 
         List<Card> allCardsByRarity = search(cardsCollection)
@@ -56,7 +59,13 @@ public class BoostersGenerator {
         cardsShuffler.shuffle(allCardsByRarity);
 
         for (int i = 0; i < n; i++) {
-            selectedCards.add(allCardsByRarity.remove(0));
+            if (allCardsByRarity.isEmpty()) {
+                if (!asList(rarity).contains(BASIC_LAND)) {
+                    throw new NoSuchElementException("You don't have enough " + Arrays.toString(rarity) + " cards in your collection.");
+                }
+            } else {
+                selectedCards.add(allCardsByRarity.remove(0));
+            }
         }
 
         return selectedCards;
