@@ -21,7 +21,7 @@ public class BoosterConsoleHelper {
     private static String toString(Booster booster) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Card card : booster.getCardList()) {
+        for (Card card : booster.getcardsList()) {
             stringBuilder.append(" - ").append(card.getName()).append("\n");
         }
 

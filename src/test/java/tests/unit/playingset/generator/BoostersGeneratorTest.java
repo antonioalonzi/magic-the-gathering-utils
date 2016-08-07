@@ -32,12 +32,12 @@ public class BoostersGeneratorTest {
     @Test
     public void whenCreatingBoostersCardsAreShuffledThenRemovedFromTheCardsCollection() throws Exception {
         // Given
-        List<Card> cardList = new ArrayList<>();
-        cardList.addAll(nCards(ABBOT_OF_KERAL_KEEP, 100));
-        cardList.addAll(nCards(SKYRIDER_ELF, 100));
-        cardList.addAll(nCards(ACCURSED_SPIRIT, 100));
-        cardList.addAll(nCards(SWAMP, 100));
-        CardsCollection cardsCollection = new CardsCollection(cardList);
+        List<Card> cardsList = new ArrayList<>();
+        cardsList.addAll(nCards(ABBOT_OF_KERAL_KEEP, 100));
+        cardsList.addAll(nCards(SKYRIDER_ELF, 100));
+        cardsList.addAll(nCards(ACCURSED_SPIRIT, 100));
+        cardsList.addAll(nCards(SWAMP, 100));
+        CardsCollection cardsCollection = new CardsCollection(cardsList);
 
         // When
         int numOfBoosters = 2;
@@ -49,10 +49,10 @@ public class BoostersGeneratorTest {
 
         // And: boosters have correct sizes
         assertThat(boosters).hasSize(numOfBoosters);
-        assertThat(boosters.get(0).getCardList()).hasSize(15);
-        assertThat(boosters.get(1).getCardList()).hasSize(15);
+        assertThat(boosters.get(0).getcardsList()).hasSize(15);
+        assertThat(boosters.get(1).getcardsList()).hasSize(15);
 
         // And: Collection has been reduced of 30 cards
-        assertThat(cardsCollection.getCardList()).hasSize(370);
+        assertThat(cardsCollection.getcardsList()).hasSize(370);
     }
 }

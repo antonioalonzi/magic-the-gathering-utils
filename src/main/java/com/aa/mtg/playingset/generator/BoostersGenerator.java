@@ -28,7 +28,7 @@ public class BoostersGenerator {
 
         for (int i = 0; i < numOfBoosters; i++) {
             Booster booster = generateBooster(cardsCollection);
-            cardsCollection.removeCards(booster.getCardList());
+            cardsCollection.removeCards(booster.getcardsList());
             boosters.add(booster);
         }
 

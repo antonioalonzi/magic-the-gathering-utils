@@ -13,10 +13,10 @@ import java.util.List;
 
 import static com.aa.mtg.card.CardBuilder.cardBuilder;
 
-public class CardListCsvParser implements CardListParser {
+public class CardsListCsvParser implements CardsListParser {
 
     public CardsCollection parse(InputStream fileInputStream) throws IOException {
-        List<Card> cardList = new ArrayList<>();
+        List<Card> cardsList = new ArrayList<>();
 
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(new InputStreamReader(fileInputStream));
 
@@ -32,10 +32,10 @@ public class CardListCsvParser implements CardListParser {
 
             int count = Integer.parseInt(record.get(0));
             for (int i = 0; i < count; i++){
-                cardList.add(card);
+                cardsList.add(card);
             }
         }
 
-        return new CardsCollection(cardList);
+        return new CardsCollection(cardsList);
     }
 }

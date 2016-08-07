@@ -1,7 +1,7 @@
 package tests.unit.deckbox.parser;
 
 import com.aa.mtg.collection.CardsCollection;
-import com.aa.mtg.deckbox.parser.CardListCsvParser;
+import com.aa.mtg.deckbox.parser.CardsListCsvParser;
 import org.junit.Test;
 import utils.Cards;
 
@@ -9,18 +9,18 @@ import java.io.InputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CardListCsvParserTest {
+public class CardsListCsvParserTest {
 
     @Test
     public void shouldLoadExportedCardsFromDeckbox() throws Exception {
         // given
-        InputStream fileInputStream = CardListCsvParserTest.class.getResourceAsStream("/deckbox/parser/extracted-file.csv");
+        InputStream fileInputStream = CardsListCsvParserTest.class.getResourceAsStream("/deckbox/parser/extracted-file.csv");
 
         // when
-        CardsCollection cardsCollection = new CardListCsvParser().parse(fileInputStream);
+        CardsCollection cardsCollection = new CardsListCsvParser().parse(fileInputStream);
 
         // then
-        assertThat(cardsCollection.getCardList()).containsExactly(
+        assertThat(cardsCollection.getcardsList()).containsExactly(
                 Cards.ABBOT_OF_KERAL_KEEP,
                 Cards.ACCURSED_SPIRIT,
                 Cards.ACT_OF_TREASON,

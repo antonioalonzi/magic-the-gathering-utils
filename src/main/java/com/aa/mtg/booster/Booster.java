@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Booster extends CardsCollection {
 
-    public Booster(List<Card> cardList) {
-        super(cardList);
+    public Booster(List<Card> cardsList) {
+        super(cardsList);
     }
 }

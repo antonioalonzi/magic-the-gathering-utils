@@ -42,7 +42,7 @@ public class CardFinder {
     }
 
     public List<Card> fetchAll() {
-        Stream<Card> stream = cardsCollection.getCardList().stream();
+        Stream<Card> stream = cardsCollection.getcardsList().stream();
 
         for (SearchFilter filter : filters) {
             stream = stream.filter(filter);

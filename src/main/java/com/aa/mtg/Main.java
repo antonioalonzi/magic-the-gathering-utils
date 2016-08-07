@@ -4,7 +4,7 @@ import com.aa.mtg.booster.Booster;
 import com.aa.mtg.booster.BoosterConsoleHelper;
 import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.console.Console;
-import com.aa.mtg.deckbox.parser.CardListParser;
+import com.aa.mtg.deckbox.parser.CardsListParser;
 import com.aa.mtg.playingset.generator.BoostersGenerator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,12 +18,12 @@ import static com.aa.mtg.playingset.generator.BoostersGenerator.BOOSTER_GENERATO
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
-    private final CardListParser cardListParser;
+    private final CardsListParser cardsListParser;
     private final BoostersGenerator boostersGenerator;
     private final Console console;
 
-    public Main(CardListParser cardListParser, BoostersGenerator boostersGenerator, Console console) {
-        this.cardListParser = cardListParser;
+    public Main(CardsListParser cardsListParser, BoostersGenerator boostersGenerator, Console console) {
+        this.cardsListParser = cardsListParser;
         this.boostersGenerator = boostersGenerator;
         this.console = console;
     }
@@ -43,7 +43,7 @@ public class Main implements CommandLineRunner {
 
     public void run(String... args) throws Exception {
         if (args[0].equals(BOOSTER_GENERATOR_COMMAND)) {
-            CardsCollection cardsCollection = cardListParser.parse(new FileInputStream(args[1]));
+            CardsCollection cardsCollection = cardsListParser.parse(new FileInputStream(args[1]));
             List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, 1);
             console.print(BoosterConsoleHelper.toString(boosters));
         }

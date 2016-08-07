@@ -2,8 +2,8 @@ package com.aa.mtg;
 
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deck.DeckFactory;
-import com.aa.mtg.deckbox.parser.CardListCsvParser;
-import com.aa.mtg.deckbox.parser.CardListParser;
+import com.aa.mtg.deckbox.parser.CardsListCsvParser;
+import com.aa.mtg.deckbox.parser.CardsListParser;
 import com.aa.mtg.playingset.generator.BoostersGenerator;
 import com.aa.mtg.shuffler.CardsShuffler;
 import com.aa.mtg.shuffler.JavaCollectionsDeckShuffler;
@@ -29,8 +29,8 @@ public class MainConfiguration {
     }
 
     @Bean
-    public CardListParser cardListParser() {
-        return new CardListCsvParser();
+    public CardsListParser cardsListParser() {
+        return new CardsListCsvParser();
     }
 
     @Bean

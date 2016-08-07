@@ -6,17 +6,17 @@ import java.util.List;
 
 public class CardsCollection {
 
-    private final List<Card> cardList;
+    private final List<Card> cardsList;
 
-    public CardsCollection(List<Card> cardList) {
-        this.cardList = cardList;
+    public CardsCollection(List<Card> cardsList) {
+        this.cardsList = cardsList;
     }
 
-    public List<Card> getCardList() {
-        return cardList;
+    public List<Card> getcardsList() {
+        return cardsList;
     }
 
-    public void removeCards(List<Card> cardList) {
-        cardList.forEach(this.cardList::remove);
+    public void removeCards(List<Card> cardsList) {
+        cardsList.forEach(this.cardsList::remove);
     }
 }
