@@ -1,13 +1,10 @@
 package tests.acceptance.playingset.generator;
 
-import com.aa.mtg.Main;
-import com.aa.mtg.console.Console;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import tests.acceptance.AbstractAcceptanceTest;
 import tests.acceptance.MainTestConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,15 +12,7 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {MainTestConfiguration.class})
-public class BoostersGeneratorAcceptanceTest {
-
-    @Autowired
-    private Main main;
-
-    @Autowired
-    private Console console;
-
-    private ArgumentCaptor<String> consoleArguments = ArgumentCaptor.forClass(String.class);
+public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
 
     @Test
     public void shouldGenerateABooster() throws Exception {
@@ -31,7 +20,7 @@ public class BoostersGeneratorAcceptanceTest {
         String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
         main.run("booster-generator", cardsCollectionPath, "1");
 
-        // assert that there 1 rare, 3 uncommons, 10 common, 1 basic land.
+        // assert that there are 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());
 
         assertThat(consoleArguments.getValue()).isEqualTo(

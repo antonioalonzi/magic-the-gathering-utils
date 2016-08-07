@@ -40,6 +40,11 @@ public class Main implements CommandLineRunner {
     }
 
     public void run(String... args) throws Exception {
+        if (args.length <= 0) {
+            console.print("Missing first argument: you need to specify an utility to run.\n");
+            return;
+        }
+
         if (args[0].equals(BOOSTER_GENERATOR_COMMAND)) {
             CardsCollection cardsCollection = cardsListParser.parse(new FileInputStream(args[1]));
             List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, parseInt(args[2]));

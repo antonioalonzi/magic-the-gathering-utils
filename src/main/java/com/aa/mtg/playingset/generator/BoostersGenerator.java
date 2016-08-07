@@ -4,6 +4,7 @@ import com.aa.mtg.booster.Booster;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.card.Rarity;
 import com.aa.mtg.collection.CardsCollection;
+import com.aa.mtg.exception.HandledException;
 import com.aa.mtg.shuffler.CardsShuffler;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class BoostersGenerator {
         for (int i = 0; i < n; i++) {
             if (allCardsByRarity.isEmpty()) {
                 if (!asList(rarity).contains(BASIC_LAND)) {
-                    throw new NoSuchElementException("You don't have enough " + Arrays.toString(rarity) + " cards in your collection.");
+                    throw new HandledException("You don't have enough " + Arrays.toString(rarity) + " cards in your collection.");
                 }
             } else {
                 selectedCards.add(allCardsByRarity.remove(0));

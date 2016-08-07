@@ -1,0 +1,25 @@
+package tests.acceptance;
+
+import com.aa.mtg.Main;
+import com.aa.mtg.console.Console;
+import org.junit.Before;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public abstract class AbstractAcceptanceTest {
+
+    @Autowired
+    protected Main main;
+
+    @Autowired
+    protected Console console;
+
+    protected ArgumentCaptor<String> consoleArguments = ArgumentCaptor.forClass(String.class);
+
+
+    @Before
+    public void cleanupConsoleMock() {
+        Mockito.reset(console);
+    }
+}

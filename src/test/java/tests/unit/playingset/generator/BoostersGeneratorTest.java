@@ -3,6 +3,7 @@ package tests.unit.playingset.generator;
 import com.aa.mtg.booster.Booster;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.collection.CardsCollection;
+import com.aa.mtg.exception.HandledException;
 import com.aa.mtg.playingset.generator.BoostersGenerator;
 import com.aa.mtg.shuffler.CardsShuffler;
 import org.junit.Test;
@@ -73,7 +74,7 @@ public class BoostersGeneratorTest {
         assertThat(boosters.get(0).getcardsList()).hasSize(14);
     }
 
-    @Test
+    @Test(expected = HandledException.class)
     public void boosterWithNotEnoughCommons() throws Exception {
         // Given
         List<Card> cardsList = new ArrayList<>();
