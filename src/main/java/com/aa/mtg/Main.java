@@ -31,15 +31,12 @@ public class Main implements CommandLineRunner {
 
     /**
      * Run the selected application utility.
-     *
-     * Not yet properly implemented.
-     * Currently arguments can be modified only by modifying the main class.
+     * Check "README.md usage" for more info.
      * @param args
-     *   The first argument is the utility to run.
-     *   All the other arguments represent the arguments for that utility.
      */
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "/home/antonio/Downloads/allMyCards.csv", "6");
+        //SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "/home/antonio/Downloads/allMyCards.csv", "6");
+        SpringApplication.run(Main.class, args);
     }
 
     public void run(String... args) throws Exception {
