@@ -16,7 +16,7 @@ public class StartingAppErrorsAcceptanceTest extends AbstractAcceptanceTest {
 
     @Test
     public void applicationLaunchedWithoutArguments() throws Exception {
-        main.run();
+        main.run(new String[0]);
 
         verify(console).print(consoleArguments.capture());
         assertThat(consoleArguments.getValue()).isEqualTo(

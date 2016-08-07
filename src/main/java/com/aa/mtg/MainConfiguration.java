@@ -24,8 +24,8 @@ public class MainConfiguration {
     }
 
     @Bean
-    public BoostersGenerator boostersGenerator(CardsShuffler cardsShuffler) {
-        return new BoostersGenerator(cardsShuffler);
+    public BoostersGenerator boostersGenerator(CardsShuffler cardsShuffler, CardsListParser cardsListParser, Console console) {
+        return new BoostersGenerator(cardsShuffler, cardsListParser, console);
     }
 
     @Bean

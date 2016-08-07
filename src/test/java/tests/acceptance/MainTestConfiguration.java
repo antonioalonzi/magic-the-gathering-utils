@@ -2,11 +2,13 @@ package tests.acceptance;
 
 import com.aa.mtg.Main;
 import com.aa.mtg.MainConfiguration;
+import com.aa.mtg.Utility;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardsListParser;
-import com.aa.mtg.playingset.generator.BoostersGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 import static org.mockito.Mockito.mock;
 
@@ -18,8 +20,8 @@ public class MainTestConfiguration extends MainConfiguration {
      * @return main application
      */
     @Bean
-    public Main main(CardsListParser cardsListParser, BoostersGenerator boostersGenerator, Console console) {
-        return new Main(cardsListParser, boostersGenerator, console);
+    public Main main(CardsListParser cardsListParser, List<Utility> utilities, Console console) {
+        return new Main(cardsListParser, utilities, console);
     }
 
     /**

@@ -1,31 +1,26 @@
 package com.aa.mtg;
 
-import com.aa.mtg.booster.Booster;
-import com.aa.mtg.booster.BoosterConsoleHelper;
-import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardsListParser;
-import com.aa.mtg.playingset.generator.BoostersGenerator;
+import com.aa.mtg.exception.HandledException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.FileInputStream;
 import java.util.List;
 
-import static com.aa.mtg.playingset.generator.BoostersGenerator.BOOSTER_GENERATOR_COMMAND;
-import static java.lang.Integer.parseInt;
+import static java.util.Arrays.asList;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
     private final CardsListParser cardsListParser;
-    private final BoostersGenerator boostersGenerator;
+    private final List<Utility> utilities;
     private final Console console;
 
-    public Main(CardsListParser cardsListParser, BoostersGenerator boostersGenerator, Console console) {
+    public Main(CardsListParser cardsListParser, List<Utility> utilities, Console console) {
         this.cardsListParser = cardsListParser;
-        this.boostersGenerator = boostersGenerator;
+        this.utilities = utilities;
         this.console = console;
     }
 
@@ -39,16 +34,29 @@ public class Main implements CommandLineRunner {
         SpringApplication.run(Main.class, args);
     }
 
-    public void run(String... args) throws Exception {
-        if (args.length <= 0) {
+    public void run(String ...args) {
+        run(asList(args));
+    }
+
+    private void run(List<String> args) {
+        if (args.size() <= 0) {
             console.print("Missing first argument: you need to specify an utility to run.\n");
             return;
         }
 
-        if (args[0].equals(BOOSTER_GENERATOR_COMMAND)) {
-            CardsCollection cardsCollection = cardsListParser.parse(new FileInputStream(args[1]));
-            List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, parseInt(args[2]));
-            console.print(BoosterConsoleHelper.toString(boosters));
+        String utilityCommand = args.get(0);
+        List<String> utilityArguments = args.subList(1, args.size());
+
+        for (Utility utility : utilities) {
+            if (utility.getCommand().equals(utilityCommand)) {
+
+                try {
+                    utility.run(utilityArguments);
+
+                } catch (HandledException e) {
+                    console.print(e.getMessage() + "\n");
+                }
+            }
         }
     }
 }

@@ -44,4 +44,65 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
         );
     }
 
+    @Test
+    public void shouldGenerateMoreThanOneBooster() throws Exception {
+        // generate a booster for a collection with one card per rarity type
+        String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
+        main.run("booster-generator", cardsCollectionPath, "2");
+
+        // assert that there are 1 rare, 3 uncommons, 10 common, 1 basic land.
+        verify(console).print(consoleArguments.capture());
+
+        assertThat(consoleArguments.getValue()).isEqualTo(
+                "Booster 1:\n" +
+                        " - Abbot of Keral Keep\n" +
+                        " - Skyrider Elf\n" +
+                        " - Skyrider Elf\n" +
+                        " - Skyrider Elf\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Swamp\n" +
+                        "\n" +
+                "Booster 2:\n" +
+                        " - Abbot of Keral Keep\n" +
+                        " - Skyrider Elf\n" +
+                        " - Skyrider Elf\n" +
+                        " - Skyrider Elf\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Accursed Spirit\n" +
+                        " - Swamp\n" +
+                        "\n"
+        );
+    }
+
+    @Test
+    public void shouldDisplayErrorIfNotEnoughCads() throws Exception {
+        // generate a booster for a collection with one card per rarity type
+        String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection-few-cards.csv").getPath();
+        main.run("booster-generator", cardsCollectionPath, "1");
+
+        // assert that there are 1 rare, 3 uncommons, 10 common, 1 basic land.
+        verify(console).print(consoleArguments.capture());
+
+        assertThat(consoleArguments.getValue()).isEqualTo(
+                "You don't have enough [UNCOMMON] cards in your collection.\n"
+        );
+    }
+
 }

@@ -1,9 +1,13 @@
 package com.aa.mtg.playingset.generator;
 
+import com.aa.mtg.Utility;
 import com.aa.mtg.booster.Booster;
+import com.aa.mtg.booster.BoosterConsoleHelper;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.card.Rarity;
 import com.aa.mtg.collection.CardsCollection;
+import com.aa.mtg.console.Console;
+import com.aa.mtg.deckbox.parser.CardsListParser;
 import com.aa.mtg.exception.HandledException;
 import com.aa.mtg.shuffler.CardsShuffler;
 
@@ -15,16 +19,32 @@ import java.util.NoSuchElementException;
 import static com.aa.mtg.card.Rarity.*;
 import static com.aa.mtg.collection.search.CardFinder.search;
 import static com.aa.mtg.collection.search.filter.RarityFilter.rarity;
+import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 
-public class BoostersGenerator {
-
-    public static final String BOOSTER_GENERATOR_COMMAND = "booster-generator";
+public class BoostersGenerator implements Utility {
 
     private final CardsShuffler cardsShuffler;
+    private final CardsListParser cardsListParser;
+    private final Console console;
 
-    public BoostersGenerator(CardsShuffler cardsShuffler) {
+    public BoostersGenerator(CardsShuffler cardsShuffler, CardsListParser cardsListParser, Console console) {
         this.cardsShuffler = cardsShuffler;
+        this.cardsListParser = cardsListParser;
+        this.console = console;
+    }
+
+    @Override
+    public String getCommand() {
+        return "booster-generator";
+    }
+
+    @Override
+    public void run(List<String> args) throws HandledException {
+        CardsCollection cardsCollection;
+        cardsCollection = cardsListParser.parse(args.get(0));
+        List<Booster> boosters = generateBoosters(cardsCollection, parseInt(args.get(1)));
+        console.print(BoosterConsoleHelper.toString(boosters));
     }
 
     public List<Booster> generateBoosters(CardsCollection cardsCollection, int numOfBoosters) {
