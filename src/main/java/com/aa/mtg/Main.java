@@ -6,7 +6,6 @@ import com.aa.mtg.collection.CardCollection;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardListParser;
 import com.aa.mtg.playingset.generator.BoosterGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,14 +18,15 @@ import static com.aa.mtg.playingset.generator.BoosterGenerator.BOOSTER_GENERATOR
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
-    @Autowired
-    private CardListParser cardListParser;
+    private final CardListParser cardListParser;
+    private final BoosterGenerator boosterGenerator;
+    private final Console console;
 
-    @Autowired
-    private BoosterGenerator boosterGenerator;
-
-    @Autowired
-    private Console console;
+    public Main(CardListParser cardListParser, BoosterGenerator boosterGenerator, Console console) {
+        this.cardListParser = cardListParser;
+        this.boosterGenerator = boosterGenerator;
+        this.console = console;
+    }
 
     /**
      * Run the selected application utility.
@@ -38,7 +38,7 @@ public class Main implements CommandLineRunner {
      *   All the other arguments represent the arguments for that utility.
      */
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "~/Downloads/allMyCards.csv");
     }
 
     public void run(String... args) throws Exception {

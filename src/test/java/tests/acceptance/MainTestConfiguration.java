@@ -3,6 +3,8 @@ package tests.acceptance;
 import com.aa.mtg.Main;
 import com.aa.mtg.MainConfiguration;
 import com.aa.mtg.console.Console;
+import com.aa.mtg.deckbox.parser.CardListParser;
+import com.aa.mtg.playingset.generator.BoosterGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,8 +18,8 @@ public class MainTestConfiguration extends MainConfiguration {
      * @return main application
      */
     @Bean
-    public Main main() {
-        return new Main();
+    public Main main(CardListParser cardListParser, BoosterGenerator boosterGenerator, Console console) {
+        return new Main(cardListParser, boosterGenerator, console);
     }
 
     /**
