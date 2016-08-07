@@ -1,11 +1,9 @@
 package tests.deck;
 
-import com.aa.mtg.MainConfiguration;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.deck.Deck;
 import com.aa.mtg.deck.DeckFactory;
 import com.aa.mtg.deck.shuffler.DeckShuffler;
-import tests.cards.Cards;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import tests.MainTestConfiguration;
+import utils.Cards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,11 +63,14 @@ public class DeckTest {
     }
 
     @Configuration
-    static class DeckTestConfiguration extends MainConfiguration {
+    static class DeckTestConfiguration extends MainTestConfiguration {
+
         @Bean
         @Override
         public DeckShuffler javaCollectionsDeckShuffler() {
             return mock(DeckShuffler.class);
         }
+
     }
+
 }

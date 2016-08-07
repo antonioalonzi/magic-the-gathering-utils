@@ -1,4 +1,4 @@
-package tests.cards;
+package utils;
 
 import com.aa.mtg.card.Card;
 

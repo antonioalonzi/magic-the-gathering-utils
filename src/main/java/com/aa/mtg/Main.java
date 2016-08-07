@@ -1,6 +1,16 @@
 package com.aa.mtg;
 
-public class Main {
+import com.aa.mtg.playingset.generators.BoosterGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Main implements CommandLineRunner {
+
+    @Autowired
+    private BoosterGenerator boosterGenerator;
 
     /**
      * Run the selected application utility.
@@ -12,12 +22,10 @@ public class Main {
      *   All the other arguments represent the arguments for that utility.
      */
     public static void main(String[] args) {
-        String arg0 = "generate-booster";
-
-        new Main().run(arg0);
+        SpringApplication.run(Main.class, args);
     }
 
-    void run(String ...args) {
-
+    public void run(String... args) throws Exception {
+        System.out.println("test");
     }
 }

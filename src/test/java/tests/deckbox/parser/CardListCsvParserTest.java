@@ -1,8 +1,8 @@
-package tests.deckbox.parsers;
+package tests.deckbox.parser;
 
 import com.aa.mtg.card.Card;
-import com.aa.mtg.deckbox.parsers.CardListCsvParser;
-import tests.cards.Cards;
+import com.aa.mtg.deckbox.parser.CardListCsvParser;
+import utils.Cards;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -15,7 +15,7 @@ public class CardListCsvParserTest {
     @Test
     public void shouldLoadExportedCardsFromDeckbox() throws Exception {
         // given
-        InputStream fileInputStream = CardListCsvParserTest.class.getResourceAsStream("/deckbox/extracted-file.csv");
+        InputStream fileInputStream = CardListCsvParserTest.class.getResourceAsStream("/deckbox/parser/extracted-file.csv");
 
         // when
         List<Card> cardList = new CardListCsvParser().parse(fileInputStream);
