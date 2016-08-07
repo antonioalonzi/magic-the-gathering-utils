@@ -46,7 +46,7 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
 
     @Test
     public void shouldGenerateMoreThanOneBooster() throws Exception {
-        // generate a booster for a collection with one card per rarity type
+        // generate two boosters for a collection with one card per rarity type
         String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
         main.run("booster-generator", cardsCollectionPath, "2");
 
@@ -92,8 +92,18 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
     }
 
     @Test
+    public void shouldDisplayErrorIfNotExistingFile() throws Exception {
+        main.run("booster-generator", "non-existing-file", "1");
+        verify(console).print(consoleArguments.capture());
+
+        assertThat(consoleArguments.getValue()).isEqualTo(
+                "File 'non-existing-file' not found.\n"
+        );
+    }
+
+    @Test
     public void shouldDisplayErrorIfNotEnoughCads() throws Exception {
-        // generate a booster for a collection with one card per rarity type
+        // try generate a booster with a file that a very few cards
         String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection-few-cards.csv").getPath();
         main.run("booster-generator", cardsCollectionPath, "1");
 

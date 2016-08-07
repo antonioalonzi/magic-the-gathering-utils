@@ -18,7 +18,7 @@ public class CardsListCsvParser implements CardsListParser {
         try {
             return parse(new FileInputStream(file));
         } catch (FileNotFoundException e) {
-            throw new HandledException("File " + file + " not found.");
+            throw new HandledException("File '" + file + "' not found.");
         }
     }
 
