@@ -2,7 +2,7 @@ package tests.acceptance;
 
 import com.aa.mtg.Main;
 import com.aa.mtg.MainConfiguration;
-import com.aa.mtg.Utility;
+import com.aa.mtg.utility.Utility;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardsListParser;
 import org.springframework.context.annotation.Bean;

@@ -92,8 +92,22 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
     }
 
     @Test
+    public void shouldDisplayErrorFileNotPassed() throws Exception {
+        main.run("booster-generator");
+        verify(console).print(consoleArguments.capture());
+
+        assertThat(consoleArguments.getValue()).isEqualTo(
+                "File missing\n" +
+                "Usage: \n" +
+                "  booster-generator file numOfBoosters\n" +
+                "     file: extracted deck csv file from deckbox\n" +
+                "     numOfBoosters: number of boosters to generate\n"
+        );
+    }
+
+    @Test
     public void shouldDisplayErrorIfNotExistingFile() throws Exception {
-        main.run("booster-generator", "non-existing-file", "1");
+        main.run("booster-generator", "non-existing-file");
         verify(console).print(consoleArguments.capture());
 
         assertThat(consoleArguments.getValue()).isEqualTo(

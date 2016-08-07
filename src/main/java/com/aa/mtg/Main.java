@@ -3,6 +3,7 @@ package com.aa.mtg;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardsListParser;
 import com.aa.mtg.exception.HandledException;
+import com.aa.mtg.utility.Utility;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

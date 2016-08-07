@@ -1,6 +1,5 @@
 package com.aa.mtg.playingset.generator;
 
-import com.aa.mtg.Utility;
 import com.aa.mtg.booster.Booster;
 import com.aa.mtg.booster.BoosterConsoleHelper;
 import com.aa.mtg.card.Card;
@@ -10,6 +9,8 @@ import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardsListParser;
 import com.aa.mtg.exception.HandledException;
 import com.aa.mtg.shuffler.CardsShuffler;
+import com.aa.mtg.utility.AbstractUtility;
+import com.aa.mtg.utility.Utility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,7 @@ import static com.aa.mtg.collection.search.filter.RarityFilter.rarity;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 
-public class BoostersGenerator implements Utility {
+public class BoostersGenerator extends AbstractUtility implements Utility {
 
     private final CardsShuffler cardsShuffler;
     private final CardsListParser cardsListParser;
@@ -40,10 +41,17 @@ public class BoostersGenerator implements Utility {
     }
 
     @Override
+    public String usage() {
+        return "  booster-generator file numOfBoosters\n" +
+               "     file: extracted deck csv file from deckbox\n" +
+               "     numOfBoosters: number of boosters to generate";
+    }
+
+    @Override
     public void run(List<String> args) throws HandledException {
         CardsCollection cardsCollection;
-        cardsCollection = cardsListParser.parse(args.get(0));
-        List<Booster> boosters = generateBoosters(cardsCollection, parseInt(args.get(1)));
+        cardsCollection = cardsListParser.parse(getFile(args));
+        List<Booster> boosters = generateBoosters(cardsCollection, getNumOfBoosters(args));
         console.print(BoosterConsoleHelper.toString(boosters));
     }
 
@@ -91,4 +99,16 @@ public class BoostersGenerator implements Utility {
 
         return selectedCards;
     }
+
+    private String getFile(List<String> args) {
+        if (args.size() <= 0) {
+            throwUsageException("File missing");
+        }
+        return args.get(0);
+    }
+
+    private int getNumOfBoosters(List<String> args) {
+        return parseInt(args.get(1));
+    }
+
 }
