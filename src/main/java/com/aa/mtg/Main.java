@@ -1,5 +1,7 @@
 package com.aa.mtg;
 
+import com.aa.mtg.booster.Booster;
+import com.aa.mtg.booster.BoosterConsoleHelper;
 import com.aa.mtg.collection.CardCollection;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardListParser;
@@ -10,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.FileInputStream;
+import java.util.List;
 
 import static com.aa.mtg.playingset.generator.BoosterGenerator.BOOSTER_GENERATOR_COMMAND;
 
@@ -41,7 +44,8 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (args[0].equals(BOOSTER_GENERATOR_COMMAND)) {
             CardCollection cardCollection = cardListParser.parse(new FileInputStream(args[1]));
-            boosterGenerator.generateBoosters(cardCollection, 1);
+            List<Booster> boosters = boosterGenerator.generateBoosters(cardCollection, 1);
+            console.print(BoosterConsoleHelper.toString(boosters));
         }
     }
 }

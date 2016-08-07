@@ -1,6 +1,7 @@
-package com.aa.mtg.collection;
+package com.aa.mtg.booster;
 
 import com.aa.mtg.card.Card;
+import com.aa.mtg.collection.CardCollection;
 
 import java.util.List;
 

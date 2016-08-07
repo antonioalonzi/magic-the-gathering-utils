@@ -4,14 +4,14 @@ import com.aa.mtg.Main;
 import com.aa.mtg.console.Console;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import tests.acceptance.MainTestConfiguration;
 
-import static org.mockito.Mockito.times;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import static utils.Cards.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {MainTestConfiguration.class})
@@ -23,6 +23,8 @@ public class BoosterGenerator {
     @Autowired
     private Console console;
 
+    private ArgumentCaptor<String> consoleArguments = ArgumentCaptor.forClass(String.class);
+
     @Test
     public void shouldGenerateABooster() throws Exception {
         // generate a booster for a collection with one card per rarity type
@@ -30,10 +32,27 @@ public class BoosterGenerator {
         main.run("booster-generator", cardCollectionPath);
 
         // assert that there 1 rare, 3 uncommons, 11 common, 1 basic land.
-        verify(console, times(1)).print(ABBOT_OF_KERAL_KEEP.getName() + "\n");
-        verify(console, times(3)).print(SKYRIDER_ELF.getName() + "\n");
-        verify(console, times(10)).print(ACCURSED_SPIRIT.getName() + "\n");
-        verify(console, times(1)).print(SWAMP.getName() + "\n");
+        verify(console).print(consoleArguments.capture());
+
+        assertThat(consoleArguments.getValue()).isEqualTo(
+                "Booster 1:\n" +
+                " - Abbot of Keral Keep\n" +
+                " - Skyrider Elf\n" +
+                " - Skyrider Elf\n" +
+                " - Skyrider Elf\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                " - Accursed Spirit\n" +
+                "\n"
+        );
+
     }
 
 }

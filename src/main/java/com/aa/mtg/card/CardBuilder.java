@@ -27,9 +27,7 @@ public class CardBuilder {
     }
 
     public CardBuilder typesFromString(String typeString) {
-        if (typeString.contains(BASIC_LAND.getDescription())) {
-            types.add(BASIC_LAND);
-        } else if (typeString.contains(LAND.getDescription())) {
+        if (typeString.contains(LAND.getDescription())) {
             types.add(LAND);
         }
 
