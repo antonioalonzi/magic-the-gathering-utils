@@ -50,8 +50,10 @@ public class BoostersGenerator extends AbstractUtility implements Utility {
     @Override
     public void run(List<String> args) throws HandledException {
         CardsCollection cardsCollection;
-        cardsCollection = cardsListParser.parse(getFile(args));
-        List<Booster> boosters = generateBoosters(cardsCollection, getNumOfBoosters(args));
+        String collectionFile = getFile(args);
+        int numOfBoosters = getNumOfBoosters(args);
+        cardsCollection = cardsListParser.parse(collectionFile);
+        List<Booster> boosters = generateBoosters(cardsCollection, numOfBoosters);
         console.print(BoosterConsoleHelper.toString(boosters));
     }
 
@@ -102,13 +104,26 @@ public class BoostersGenerator extends AbstractUtility implements Utility {
 
     private String getFile(List<String> args) {
         if (args.size() <= 0) {
-            throwUsageException("File missing");
+            throw usageException("File missing");
         }
         return args.get(0);
     }
 
     private int getNumOfBoosters(List<String> args) {
-        return parseInt(args.get(1));
+        if (args.size() <= 1) {
+            return 1;
+        }
+
+        try {
+            int numOfBoosters = parseInt(args.get(1));
+            if (numOfBoosters <= 0) {
+                throw usageException("numOfBoosters must be a positive number.");
+            }
+
+            return numOfBoosters;
+        } catch (NumberFormatException e) {
+            throw usageException("numOfBoosters is not a valid number.");
+        }
     }
 
 }

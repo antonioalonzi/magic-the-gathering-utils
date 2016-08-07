@@ -18,7 +18,7 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
     public void shouldGenerateABooster() throws Exception {
         // generate a booster for a collection with one card per rarity type
         String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
-        main.run("booster-generator", cardsCollectionPath, "1");
+        main.run("booster-generator", cardsCollectionPath);
 
         // assert that there are 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());
@@ -102,6 +102,34 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
                 "  booster-generator file numOfBoosters\n" +
                 "     file: extracted deck csv file from deckbox\n" +
                 "     numOfBoosters: number of boosters to generate\n"
+        );
+    }
+
+    @Test
+    public void shouldDisplayErrorNumberOfBoosterIsNotANumber() throws Exception {
+        main.run("booster-generator", "existing-file", "not-a-number");
+        verify(console).print(consoleArguments.capture());
+
+        assertThat(consoleArguments.getValue()).isEqualTo(
+                "numOfBoosters is not a valid number.\n" +
+                        "Usage: \n" +
+                        "  booster-generator file numOfBoosters\n" +
+                        "     file: extracted deck csv file from deckbox\n" +
+                        "     numOfBoosters: number of boosters to generate\n"
+        );
+    }
+
+    @Test
+    public void shouldDisplayErrorNumberOfBoosterIsNegative() throws Exception {
+        main.run("booster-generator", "existing-file", "-1");
+        verify(console).print(consoleArguments.capture());
+
+        assertThat(consoleArguments.getValue()).isEqualTo(
+                "numOfBoosters must be a positive number.\n" +
+                        "Usage: \n" +
+                        "  booster-generator file numOfBoosters\n" +
+                        "     file: extracted deck csv file from deckbox\n" +
+                        "     numOfBoosters: number of boosters to generate\n"
         );
     }
 
