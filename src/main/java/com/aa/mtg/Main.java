@@ -37,12 +37,17 @@ public class Main implements CommandLineRunner {
     }
 
     public void run(String ...args) {
+        System.out.println("\n\n");
         run(asList(args));
+        System.out.println("\n\n");
     }
 
     private void run(List<String> args) {
         if (args.size() <= 0) {
-            console.print("Missing first argument: you need to specify an utility to run.\n");
+            console.print(
+                    "Missing first argument: you need to specify an utility to run.\n" +
+                    possibleUtilities()
+            );
             return;
         }
 
@@ -70,18 +75,19 @@ public class Main implements CommandLineRunner {
     }
 
     private void printUtilityNotFoundError(String utilityCommand) {
-        StringBuilder stringBuilder = new StringBuilder();
+        console.print(
+                "Utility '" + utilityCommand + "' not found.\n" +
+                 possibleUtilities()
+        );
+    }
 
-
-        stringBuilder.append("Utility '").append(utilityCommand).append("' not found.\n")
-                .append("Possible utilities are:\n");
+    private String possibleUtilities() {
+        StringBuilder stringBuilder = new StringBuilder("Possible utilities are:\n");
 
         for (Utility utility : utilities) {
             stringBuilder.append(" - ").append(utility.getCommand()).append("\n");
         }
 
-        console.print(
-                stringBuilder.toString()
-        );
+        return stringBuilder.toString();
     }
 }

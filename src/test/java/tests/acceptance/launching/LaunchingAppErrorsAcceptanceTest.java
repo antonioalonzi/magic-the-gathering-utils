@@ -20,7 +20,9 @@ public class LaunchingAppErrorsAcceptanceTest extends AbstractAcceptanceTest {
 
         verify(console).print(consoleArguments.capture());
         assertThat(consoleArguments.getValue()).isEqualTo(
-                "Missing first argument: you need to specify an utility to run.\n"
+                "Missing first argument: you need to specify an utility to run.\n" +
+                "Possible utilities are:\n" +
+                " - booster-generator\n"
         );
     }
 
@@ -31,8 +33,8 @@ public class LaunchingAppErrorsAcceptanceTest extends AbstractAcceptanceTest {
         verify(console).print(consoleArguments.capture());
         assertThat(consoleArguments.getValue()).isEqualTo(
                 "Utility 'non-existing-utility' not found.\n" +
-                        "Possible utilities are:\n" +
-                        " - booster-generator\n"
+                "Possible utilities are:\n" +
+                " - booster-generator\n"
         );
     }
 }
