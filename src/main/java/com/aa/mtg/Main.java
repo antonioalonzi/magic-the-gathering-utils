@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
@@ -47,16 +48,39 @@ public class Main implements CommandLineRunner {
         String utilityCommand = args.get(0);
         List<String> utilityArguments = args.subList(1, args.size());
 
-        for (Utility utility : utilities) {
-            if (utility.getCommand().equals(utilityCommand)) {
+        // find utility
+        Optional<Utility> selectedUtility = utilities
+                .stream()
+                .filter(utility -> utility.getCommand().equals(utilityCommand))
+                .findFirst();
 
-                try {
-                    utility.run(utilityArguments);
+        // run utility
+        if (selectedUtility.isPresent()) {
+            try {
+                selectedUtility.get().run(utilityArguments);
 
-                } catch (HandledException e) {
-                    console.print(e.getMessage() + "\n");
-                }
+            } catch (HandledException e) {
+                console.print(e.getMessage() + "\n");
             }
+
+        } else {
+            printUtilityNotFoundError(utilityCommand);
         }
+    }
+
+    private void printUtilityNotFoundError(String utilityCommand) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+
+        stringBuilder.append("Utility '").append(utilityCommand).append("' not found.\n")
+                .append("Possible utilities are:\n");
+
+        for (Utility utility : utilities) {
+            stringBuilder.append(" - ").append(utility.getCommand()).append("\n");
+        }
+
+        console.print(
+                stringBuilder.toString()
+        );
     }
 }
