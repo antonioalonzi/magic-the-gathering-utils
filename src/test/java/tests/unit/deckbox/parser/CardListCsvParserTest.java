@@ -1,4 +1,4 @@
-package tests.deckbox.parser;
+package tests.unit.deckbox.parser;
 
 import com.aa.mtg.card.Card;
 import com.aa.mtg.deckbox.parser.CardListCsvParser;

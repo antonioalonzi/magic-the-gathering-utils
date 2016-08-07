@@ -1,6 +1,7 @@
 package com.aa.mtg;
 
-import com.aa.mtg.playingset.generators.BoosterGenerator;
+import com.aa.mtg.console.Console;
+import com.aa.mtg.playingset.generator.BoosterGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +12,9 @@ public class Main implements CommandLineRunner {
 
     @Autowired
     private BoosterGenerator boosterGenerator;
+
+    @Autowired
+    private Console console;
 
     /**
      * Run the selected application utility.
@@ -26,6 +30,6 @@ public class Main implements CommandLineRunner {
     }
 
     public void run(String... args) throws Exception {
-        System.out.println("test");
+        console.print("test\n");
     }
 }

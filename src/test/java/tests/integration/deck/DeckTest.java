@@ -1,4 +1,4 @@
-package tests.deck;
+package tests.integration.deck;
 
 import com.aa.mtg.card.Card;
 import com.aa.mtg.deck.Deck;
@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import tests.MainTestConfiguration;
 import utils.Cards;
 
 import java.util.ArrayList;
@@ -63,12 +62,16 @@ public class DeckTest {
     }
 
     @Configuration
-    static class DeckTestConfiguration extends MainTestConfiguration {
+    static class DeckTestConfiguration {
 
         @Bean
-        @Override
-        public DeckShuffler javaCollectionsDeckShuffler() {
+        public DeckShuffler mockDeckShuffler() {
             return mock(DeckShuffler.class);
+        }
+
+        @Bean
+        public DeckFactory deckFactory(DeckShuffler deckShuffler) {
+            return new DeckFactory(deckShuffler);
         }
 
     }
