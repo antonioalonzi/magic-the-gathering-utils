@@ -1,6 +1,7 @@
 package com.aa.mtg.card;
 
 public enum Rarity {
+    BASIC_LAND("BasicLand"),
     UNCOMMON("Uncommon"),
     COMMON("Common"),
     RARE("Rare"),

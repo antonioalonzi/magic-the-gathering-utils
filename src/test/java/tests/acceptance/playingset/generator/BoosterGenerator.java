@@ -31,7 +31,7 @@ public class BoosterGenerator {
         String cardCollectionPath = BoosterGenerator.class.getResource("/playingset/generator/card-collection.csv").getPath();
         main.run("booster-generator", cardCollectionPath);
 
-        // assert that there 1 rare, 3 uncommons, 11 common, 1 basic land.
+        // assert that there 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());
 
         assertThat(consoleArguments.getValue()).isEqualTo(
@@ -50,6 +50,7 @@ public class BoosterGenerator {
                 " - Accursed Spirit\n" +
                 " - Accursed Spirit\n" +
                 " - Accursed Spirit\n" +
+                " - Swamp\n" +
                 "\n"
         );
 

@@ -1,8 +1,8 @@
 package com.aa.mtg.playingset.generator;
 
+import com.aa.mtg.booster.Booster;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.card.Rarity;
-import com.aa.mtg.booster.Booster;
 import com.aa.mtg.collection.CardCollection;
 import com.aa.mtg.shuffler.CardsShuffler;
 
@@ -37,6 +37,7 @@ public class BoosterGenerator {
         boosterCards.addAll(selectNCardsByRarity(cardCollection, 1, MYTHIC_RARE, RARE));
         boosterCards.addAll(selectNCardsByRarity(cardCollection, 3, UNCOMMON));
         boosterCards.addAll(selectNCardsByRarity(cardCollection, 10, COMMON));
+        boosterCards.addAll(selectNCardsByRarity(cardCollection, 1, BASIC_LAND));
 
         return new Booster(boosterCards);
     }

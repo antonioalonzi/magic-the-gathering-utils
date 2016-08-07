@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.aa.mtg.card.Rarity.*;
 import static com.aa.mtg.card.Type.*;
 
 public class CardBuilder {
@@ -71,14 +70,10 @@ public class CardBuilder {
     }
 
     public CardBuilder rarity(String rarity) {
-        if (rarity.equals(UNCOMMON.getDescription())) {
-            this.rarity = UNCOMMON;
-        } else if (rarity.equals(COMMON.getDescription())) {
-            this.rarity = COMMON;
-        } else if (rarity.equals(RARE.getDescription())) {
-            this.rarity = RARE;
-        } else if (rarity.equals(MYTHIC_RARE.getDescription())) {
-            this.rarity = MYTHIC_RARE;
+        for (Rarity rarityValue : Rarity.values()) {
+            if (rarity.equals(rarityValue.getDescription())) {
+                this.rarity = rarityValue;
+            }
         }
         return this;
     }
