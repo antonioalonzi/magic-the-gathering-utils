@@ -7,7 +7,6 @@ import com.aa.mtg.collection.search.filter.SearchFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CardFinder {
 
@@ -42,12 +41,8 @@ public class CardFinder {
     }
 
     public List<Card> fetchAll() {
-        Stream<Card> stream = cardsCollection.getcardsList().stream();
-
-        for (SearchFilter filter : filters) {
-            stream = stream.filter(filter);
-        }
-
-        return stream.collect(Collectors.toList());
+        return cardsCollection.getcardsList().stream()
+                .filter(filters.stream().reduce((current, next) -> current.and(next)).orElse(card -> true))
+                .collect(Collectors.toList());
     }
 }
