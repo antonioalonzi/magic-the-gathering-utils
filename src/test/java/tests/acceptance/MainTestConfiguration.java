@@ -2,9 +2,10 @@ package tests.acceptance;
 
 import com.aa.mtg.Main;
 import com.aa.mtg.MainConfiguration;
-import com.aa.mtg.utility.Utility;
 import com.aa.mtg.console.Console;
-import com.aa.mtg.deckbox.parser.CardsListParser;
+import com.aa.mtg.settings.Settings;
+import com.aa.mtg.utility.Utility;
+import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,8 +21,8 @@ public class MainTestConfiguration extends MainConfiguration {
      * @return main application
      */
     @Bean
-    public Main main(CardsListParser cardsListParser, List<Utility> utilities, Console console) {
-        return new Main(cardsListParser, utilities, console);
+    public Main main(Settings settings, List<Utility> utilities, Console console) {
+        return new Main(settings, utilities, console);
     }
 
     /**
@@ -33,6 +34,16 @@ public class MainTestConfiguration extends MainConfiguration {
     @Override
     public Console console() {
         return mock(Console.class);
+    }
+
+    /**
+     * Although those are Acceptance Tests the Settings needs to be mocked for testing purposes
+     * @return mock for settings
+     */
+    @Bean
+    @Override
+    public Settings settings(Console console) {
+        return Mockito.mock(Settings.class);
     }
 
 }

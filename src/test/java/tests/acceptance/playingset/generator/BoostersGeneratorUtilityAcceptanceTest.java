@@ -8,21 +8,23 @@ import tests.acceptance.AbstractAcceptanceTest;
 import tests.acceptance.MainTestConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {MainTestConfiguration.class})
-public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
+public class BoostersGeneratorUtilityAcceptanceTest extends AbstractAcceptanceTest {
 
     @Test
     public void shouldGenerateABooster() throws Exception {
-        // generate a booster for a collection with one card per rarity type
-        String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
-        main.run("booster-generator", cardsCollectionPath);
+        // Given some cards
+        given(settings.getCollectionPath()).willReturn(getPath("/playingset/generator/card-collection.csv"));
 
-        // assert that there are 1 rare, 3 uncommons, 10 common, 1 basic land.
+        // When
+        main.run("booster-generator", "1");
+
+        // Then there are 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());
-
         assertThat(consoleArguments.getValue()).isEqualTo(
                 "Booster 1:\n" +
                 " - Abbot of Keral Keep\n" +
@@ -46,13 +48,14 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
 
     @Test
     public void shouldGenerateMoreThanOneBooster() throws Exception {
-        // generate two boosters for a collection with one card per rarity type
-        String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection.csv").getPath();
-        main.run("booster-generator", cardsCollectionPath, "2");
+        // Given some cards
+        given(settings.getCollectionPath()).willReturn(getPath("/playingset/generator/card-collection.csv"));
 
-        // assert that there are 1 rare, 3 uncommons, 10 common, 1 basic land.
+        // When
+        main.run("booster-generator", "2");
+
+        // Then there are 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());
-
         assertThat(consoleArguments.getValue()).isEqualTo(
                 "Booster 1:\n" +
                         " - Abbot of Keral Keep\n" +
@@ -92,69 +95,36 @@ public class BoostersGeneratorAcceptanceTest extends AbstractAcceptanceTest {
     }
 
     @Test
-    public void shouldDisplayErrorFileNotPassed() throws Exception {
-        main.run("booster-generator");
-        verify(console).print(consoleArguments.capture());
-
-        assertThat(consoleArguments.getValue()).isEqualTo(
-                "File missing\n" +
-                "Usage: \n" +
-                "  booster-generator file numOfBoosters\n" +
-                "     file: extracted deck csv file from deckbox\n" +
-                "     numOfBoosters: number of boosters to generate\n"
-        );
-    }
-
-    @Test
-    public void shouldDisplayErrorNumberOfBoosterIsNotANumber() throws Exception {
-        main.run("booster-generator", "existing-file", "not-a-number");
-        verify(console).print(consoleArguments.capture());
-
-        assertThat(consoleArguments.getValue()).isEqualTo(
-                "numOfBoosters is not a valid number.\n" +
-                        "Usage: \n" +
-                        "  booster-generator file numOfBoosters\n" +
-                        "     file: extracted deck csv file from deckbox\n" +
-                        "     numOfBoosters: number of boosters to generate\n"
-        );
-    }
-
-    @Test
     public void shouldDisplayErrorNumberOfBoosterIsNegative() throws Exception {
-        main.run("booster-generator", "existing-file", "-1");
-        verify(console).print(consoleArguments.capture());
+        // When
+        main.run("booster-generator", "-1");
 
+        // Then
+        verify(console).print(consoleArguments.capture());
         assertThat(consoleArguments.getValue()).isEqualTo(
                 "numOfBoosters must be a positive number.\n" +
                         "Usage: \n" +
-                        "  booster-generator file numOfBoosters\n" +
-                        "     file: extracted deck csv file from deckbox\n" +
+                        "  booster-generator <numOfBoosters>\n" +
                         "     numOfBoosters: number of boosters to generate\n"
-        );
-    }
-
-    @Test
-    public void shouldDisplayErrorIfNotExistingFile() throws Exception {
-        main.run("booster-generator", "non-existing-file");
-        verify(console).print(consoleArguments.capture());
-
-        assertThat(consoleArguments.getValue()).isEqualTo(
-                "File 'non-existing-file' not found.\n"
         );
     }
 
     @Test
     public void shouldDisplayErrorIfNotEnoughCads() throws Exception {
-        // try generate a booster with a file that a very few cards
-        String cardsCollectionPath = BoostersGeneratorAcceptanceTest.class.getResource("/playingset/generator/card-collection-few-cards.csv").getPath();
-        main.run("booster-generator", cardsCollectionPath, "1");
+        // Given too few cards
+        given(settings.getCollectionPath()).willReturn(getPath("/playingset/generator/card-collection-few-cards.csv"));
 
-        // assert that there are 1 rare, 3 uncommons, 10 common, 1 basic land.
+        // When
+        main.run("booster-generator", "1");
+
+        // Then an error is displayed
         verify(console).print(consoleArguments.capture());
-
         assertThat(consoleArguments.getValue()).isEqualTo(
                 "You don't have enough [UNCOMMON] cards in your collection.\n"
         );
     }
 
+    private String getPath(String csvPath) {
+        return BoostersGeneratorUtilityAcceptanceTest.class.getResource(csvPath).getPath();
+    }
 }

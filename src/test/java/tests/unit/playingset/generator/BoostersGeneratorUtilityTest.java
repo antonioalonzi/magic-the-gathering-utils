@@ -4,7 +4,7 @@ import com.aa.mtg.booster.Booster;
 import com.aa.mtg.card.Card;
 import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.exception.HandledException;
-import com.aa.mtg.playingset.generator.BoostersGenerator;
+import com.aa.mtg.playingset.generator.BoostersGeneratorUtility;
 import com.aa.mtg.shuffler.CardsShuffler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,10 +22,10 @@ import static org.mockito.Mockito.verify;
 import static utils.Cards.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BoostersGeneratorTest {
+public class BoostersGeneratorUtilityTest {
 
     @InjectMocks
-    private BoostersGenerator boostersGenerator;
+    private BoostersGeneratorUtility boostersGeneratorUtility;
 
     @Mock
     private CardsShuffler cardsShuffler;
@@ -42,7 +42,7 @@ public class BoostersGeneratorTest {
 
         // When
         int numOfBoosters = 2;
-        List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, numOfBoosters);
+        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, numOfBoosters);
 
         // Then: deck has been shuffled before each card selection
         int numOfShufflePerBooster = 4; // one for each rarity: MythicRare/Rare, Uncommon, Common, BasicLand
@@ -67,7 +67,7 @@ public class BoostersGeneratorTest {
         CardsCollection cardsCollection = new CardsCollection(cardsList);
 
         // When
-        List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, 1);
+        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, 1);
 
         // Then: boosters have correct sizes
         assertThat(boosters).hasSize(1);
@@ -85,7 +85,7 @@ public class BoostersGeneratorTest {
         CardsCollection cardsCollection = new CardsCollection(cardsList);
 
         // When
-        List<Booster> boosters = boostersGenerator.generateBoosters(cardsCollection, 1);
+        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, 1);
 
         // Then: boosters have correct sizes
         assertThat(boosters).hasSize(1);

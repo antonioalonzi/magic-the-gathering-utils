@@ -15,26 +15,30 @@ import static org.mockito.Mockito.verify;
 public class LaunchingAppErrorsAcceptanceTest extends AbstractAcceptanceTest {
 
     @Test
-    public void applicationLaunchedWithoutArguments() throws Exception {
+    public void applicationLaunchedWithoutArguments() {
+        // When
         main.run();
 
+        // Then
         verify(console).print(consoleArguments.capture());
-        assertThat(consoleArguments.getValue()).isEqualTo(
+        assertThat(consoleArguments.getValue()).startsWith(
                 "Missing first argument: you need to specify an utility to run.\n" +
                 "Possible utilities are:\n" +
-                " - booster-generator\n"
+                " -"
         );
     }
 
     @Test
-    public void applicationLaunchedWithNonExistingUtility() throws Exception {
+    public void applicationLaunchedWithNonExistingUtility() {
+        // When
         main.run("non-existing-utility");
 
+        // Then
         verify(console).print(consoleArguments.capture());
-        assertThat(consoleArguments.getValue()).isEqualTo(
+        assertThat(consoleArguments.getValue()).startsWith(
                 "Utility 'non-existing-utility' not found.\n" +
                 "Possible utilities are:\n" +
-                " - booster-generator\n"
+                " -"
         );
     }
 }

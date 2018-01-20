@@ -8,6 +8,7 @@ import com.aa.mtg.collection.CardsCollection;
 import com.aa.mtg.console.Console;
 import com.aa.mtg.deckbox.parser.CardsListParser;
 import com.aa.mtg.exception.HandledException;
+import com.aa.mtg.settings.Settings;
 import com.aa.mtg.shuffler.CardsShuffler;
 import com.aa.mtg.utility.AbstractUtility;
 import com.aa.mtg.utility.Utility;
@@ -23,13 +24,15 @@ import static com.aa.mtg.collection.search.filter.RarityFilter.rarity;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 
-public class BoostersGenerator extends AbstractUtility implements Utility {
+public class BoostersGeneratorUtility extends AbstractUtility implements Utility {
 
+    private final Settings settings;
     private final CardsShuffler cardsShuffler;
     private final CardsListParser cardsListParser;
     private final Console console;
 
-    public BoostersGenerator(CardsShuffler cardsShuffler, CardsListParser cardsListParser, Console console) {
+    public BoostersGeneratorUtility(Settings settings, CardsShuffler cardsShuffler, CardsListParser cardsListParser, Console console) {
+        this.settings = settings;
         this.cardsShuffler = cardsShuffler;
         this.cardsListParser = cardsListParser;
         this.console = console;
@@ -42,15 +45,14 @@ public class BoostersGenerator extends AbstractUtility implements Utility {
 
     @Override
     public String usage() {
-        return "  booster-generator file numOfBoosters\n" +
-               "     file: extracted deck csv file from deckbox\n" +
+        return "  booster-generator <numOfBoosters>\n" +
                "     numOfBoosters: number of boosters to generate";
     }
 
     @Override
     public void run(List<String> args) throws HandledException {
         CardsCollection cardsCollection;
-        String collectionFile = getFile(args);
+        String collectionFile = settings.getCollectionPath();
         int numOfBoosters = getNumOfBoosters(args);
         cardsCollection = cardsListParser.parse(collectionFile);
         List<Booster> boosters = generateBoosters(cardsCollection, numOfBoosters);
@@ -102,20 +104,13 @@ public class BoostersGenerator extends AbstractUtility implements Utility {
         return selectedCards;
     }
 
-    private String getFile(List<String> args) {
-        if (args.size() <= 0) {
-            throw usageException("File missing");
-        }
-        return args.get(0);
-    }
-
     private int getNumOfBoosters(List<String> args) {
-        if (args.size() <= 1) {
+        if (args.size() <= 0) {
             return 1;
         }
 
         try {
-            int numOfBoosters = parseInt(args.get(1));
+            int numOfBoosters = parseInt(args.get(0));
             if (numOfBoosters <= 0) {
                 throw usageException("numOfBoosters must be a positive number.");
             }

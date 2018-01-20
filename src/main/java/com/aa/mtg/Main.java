@@ -1,8 +1,8 @@
 package com.aa.mtg;
 
 import com.aa.mtg.console.Console;
-import com.aa.mtg.deckbox.parser.CardsListParser;
 import com.aa.mtg.exception.HandledException;
+import com.aa.mtg.settings.Settings;
 import com.aa.mtg.utility.Utility;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,12 +16,12 @@ import static java.util.Arrays.asList;
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
-    private final CardsListParser cardsListParser;
+    private Settings settings;
     private final List<Utility> utilities;
     private final Console console;
 
-    public Main(CardsListParser cardsListParser, List<Utility> utilities, Console console) {
-        this.cardsListParser = cardsListParser;
+    public Main(Settings settings, List<Utility> utilities, Console console) {
+        this.settings = settings;
         this.utilities = utilities;
         this.console = console;
     }
@@ -32,12 +32,12 @@ public class Main implements CommandLineRunner {
      * @param args
      */
     public static void main(String[] args) {
-        //SpringApplication.run(Main.class, BOOSTER_GENERATOR_COMMAND, "/home/antonio/Downloads/allMyCards.csv", "6");
         SpringApplication.run(Main.class, args);
     }
 
     public void run(String ...args) {
         System.out.println("\n\n");
+        settings.initialize();
         run(asList(args));
         System.out.println("\n\n");
     }

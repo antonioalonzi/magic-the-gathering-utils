@@ -12,7 +12,8 @@ This project contains a set of utilities that help you organizing your card coll
 ## Features
 
  * Extracting your card collection from [deckbox](https://deckbox.org)
- * Generating random Booster from your collection
+ * Generating random Boosters from your collection
+ * Local data is stored into .magic-the-gathering-utils folder in your home
 
 
 
@@ -22,36 +23,20 @@ To run the application download the latest jar from [release page](https://githu
 
 Run the jar with:
 
-    java -jar magic-the-gathering-utils-1.0.0.jar <utility> [args...]
+    java -jar magic-the-gathering-utils-1.0.0.jar link-to-deckbox <YourDeckboxId>
+        # Link the app to deckbox (YourDeckboxId is the number in deckbox url)
 
-### booster-generator
+    java -jar magic-the-gathering-utils-1.0.0.jar show-link-to-deckbox
+        # Display your deckbox id
 
-BoosterGenerator utility allow to generates random boosters from your deckbox cards collection.
+    java -jar magic-the-gathering-utils-1.0.0.jar update-collection
+        # Update your card collection
 
-You can then search the real cards from your collection, distribute to your friends and simulated a constructed game.
-
- 1. Export to CSV your collection
-    * Go on [deckbox](https://deckbox.org)
-    * Go on Inventory (on the left menu)
-    * On the Top Right bar click on Tools -> export
-    * Columns to include: select all columns as extra columns
-    * Click 'Export'
- 2. Run the booster-generator command as follow
-    
     java -jar magic-the-gathering-utils-1.0.0.jar booster-generator <NumOfBoosters>
+        # Generate some boosters that you can assemble to play with your friends
+        # Booster are composed of 1 Mythic or Rare card, 3 Uncommon cards, 10 Uncommon cards, 1 Basic land.
 
-This will print to screen a list of boosters randomly generated from your card set.
 
-Boosters are composed of:
-
- * 1 Mythic or Rare card
- * 3 Uncommon cards
- * 10 Uncommon cards
- * 1 Basic land
- 
-You probably won't need basic lands in the booster generation if your purpose is to play constructed.
-
-If you don't have basic lands then your booster will be of 14 cards and not containing basic land.
 
 ## Developer's guide
 
