@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 public class CardFinder {
 
     private List<SearchFilter> filters;
-    private CardsCollection cardsCollection;
+    private List<Card> cards;
 
-    private CardFinder(CardsCollection cardsCollection) {
-        this.cardsCollection = cardsCollection;
+    private CardFinder(List<Card> cards) {
+        this.cards = cards;
         this.filters = new ArrayList<>();
     }
 
@@ -37,12 +37,16 @@ public class CardFinder {
     }
 
     public static CardFinder search(CardsCollection cardsCollection) {
-        return new CardFinder(cardsCollection);
+        return new CardFinder(cardsCollection.getcardsList());
+    }
+
+    public static CardFinder search(List<Card> cards) {
+        return new CardFinder(cards);
     }
 
     public List<Card> fetchAll() {
-        return cardsCollection.getcardsList().stream()
-                .filter(filters.stream().reduce((current, next) -> current.and(next)).orElse(card -> true))
+        return cards.stream()
+                .filter(filters.stream().reduce(SearchFilter::and).orElse(card -> true))
                 .collect(Collectors.toList());
     }
 }

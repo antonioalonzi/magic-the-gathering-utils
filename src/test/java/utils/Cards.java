@@ -21,7 +21,7 @@ public class Cards {
     public static final Card SIEGECRAFT = cardBuilder().name("Siegecraft").ofTypes(ENCHANTMENT).rarity(COMMON).edition("Khans of Tarkir").build();
     public static final Card TAMIYO_FIELD_RESEARCHER = cardBuilder().name("Tamiyo, Field Researcher").ofTypes(PLANESWALKER).rarity(MYTHIC_RARE).edition("Eldritch Moon").build();
     public static final Card SWELL_OF_GROWTH = cardBuilder().name("Swell of Growth").ofTypes(INSTANT).rarity(COMMON).edition("Battle for Zendikar").build();
-    public static final Card SWAMP = cardBuilder().name("Swamp").ofTypes(LAND).rarity(BASIC_LAND).edition("Shadows over Innistrad").build();
+    public static final Card SWAMP = cardBuilder().name("Swamp").ofTypes(LAND).rarity(BASIC_LAND).edition("Magic Origins").build();
     public static final Card TEMPLE_OF_DECEIT = cardBuilder().name("Temple of Deceit").ofTypes(LAND).rarity(RARE).edition("Theros").build();
 
     public static List<Card> nCards(Card card, int nCopies) {

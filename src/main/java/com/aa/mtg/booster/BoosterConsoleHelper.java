@@ -22,7 +22,10 @@ public class BoosterConsoleHelper {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Card card : booster.getcardsList()) {
-            stringBuilder.append(" - ").append(card.getName()).append("\n");
+            stringBuilder.append(" - ").append(String.format("%-30s", card.getName()))
+                    .append("     ").append(card.getEdition().getDescription())
+                    .append(", ").append(card.getRarity())
+                    .append("\n");
         }
 
         return stringBuilder.toString();

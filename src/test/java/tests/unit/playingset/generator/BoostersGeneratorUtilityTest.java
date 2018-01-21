@@ -31,7 +31,7 @@ public class BoostersGeneratorUtilityTest {
     private CardsShuffler cardsShuffler;
 
     @Test
-    public void whenCreatingBoostersCardsAreShuffledThenRemovedFromTheCardsCollection() throws Exception {
+    public void whenCreatingBoostersCardsAreShuffledThenRemovedFromTheCardsCollection() {
         // Given
         List<Card> cardsList = new ArrayList<>();
         cardsList.addAll(nCards(ABBOT_OF_KERAL_KEEP, 100));
@@ -42,7 +42,7 @@ public class BoostersGeneratorUtilityTest {
 
         // When
         int numOfBoosters = 2;
-        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, numOfBoosters);
+        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, numOfBoosters, new ArrayList<>());
 
         // Then: deck has been shuffled before each card selection
         int numOfShufflePerBooster = 4; // one for each rarity: MythicRare/Rare, Uncommon, Common, BasicLand
@@ -58,7 +58,7 @@ public class BoostersGeneratorUtilityTest {
     }
 
     @Test
-    public void boosterWithoutBasicLand() throws Exception {
+    public void boosterWithoutBasicLand() {
         // Given
         List<Card> cardsList = new ArrayList<>();
         cardsList.addAll(nCards(ABBOT_OF_KERAL_KEEP, 100));
@@ -67,7 +67,7 @@ public class BoostersGeneratorUtilityTest {
         CardsCollection cardsCollection = new CardsCollection(cardsList);
 
         // When
-        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, 1);
+        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, 1, new ArrayList<>());
 
         // Then: boosters have correct sizes
         assertThat(boosters).hasSize(1);
@@ -75,7 +75,7 @@ public class BoostersGeneratorUtilityTest {
     }
 
     @Test(expected = HandledException.class)
-    public void boosterWithNotEnoughCommons() throws Exception {
+    public void boosterWithNotEnoughCommons() {
         // Given
         List<Card> cardsList = new ArrayList<>();
         cardsList.addAll(nCards(ABBOT_OF_KERAL_KEEP, 100));
@@ -85,7 +85,7 @@ public class BoostersGeneratorUtilityTest {
         CardsCollection cardsCollection = new CardsCollection(cardsList);
 
         // When
-        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, 1);
+        List<Booster> boosters = boostersGeneratorUtility.generateBoosters(cardsCollection, 1, new ArrayList<>());
 
         // Then: boosters have correct sizes
         assertThat(boosters).hasSize(1);

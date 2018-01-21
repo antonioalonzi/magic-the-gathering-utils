@@ -12,4 +12,10 @@ public interface SearchFilter extends Predicate<Card> {
         return (currentSearchFilter) ->
                 this.test(currentSearchFilter) && nextSearchFilter.test(currentSearchFilter);
     }
+
+    default SearchFilter or(SearchFilter nextSearchFilter) {
+        Objects.requireNonNull(nextSearchFilter);
+        return (currentSearchFilter) ->
+                this.test(currentSearchFilter) || nextSearchFilter.test(currentSearchFilter);
+    }
 }
