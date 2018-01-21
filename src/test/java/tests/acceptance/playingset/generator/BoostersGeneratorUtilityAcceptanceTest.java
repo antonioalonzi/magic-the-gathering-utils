@@ -21,7 +21,7 @@ public class BoostersGeneratorUtilityAcceptanceTest extends AbstractAcceptanceTe
         given(settings.getCollectionPath()).willReturn(getPath("/playingset/generator/card-collection.csv"));
 
         // When
-        main.run("booster-generator", "1");
+        main.run("generate-booster", "1");
 
         // Then there are 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());
@@ -52,7 +52,7 @@ public class BoostersGeneratorUtilityAcceptanceTest extends AbstractAcceptanceTe
         given(settings.getCollectionPath()).willReturn(getPath("/playingset/generator/card-collection.csv"));
 
         // When
-        main.run("booster-generator", "2");
+        main.run("generate-booster", "2");
 
         // Then there are 1 rare, 3 uncommons, 10 common, 1 basic land.
         verify(console).print(consoleArguments.capture());
@@ -97,14 +97,14 @@ public class BoostersGeneratorUtilityAcceptanceTest extends AbstractAcceptanceTe
     @Test
     public void shouldDisplayErrorNumberOfBoosterIsNegative() throws Exception {
         // When
-        main.run("booster-generator", "-1");
+        main.run("generate-booster", "-1");
 
         // Then
         verify(console).print(consoleArguments.capture());
         assertThat(consoleArguments.getValue()).isEqualTo(
                 "numOfBoosters must be a positive number.\n" +
                         "Usage: \n" +
-                        "  booster-generator <numOfBoosters>\n" +
+                        "  generate-booster <numOfBoosters>\n" +
                         "     numOfBoosters: number of boosters to generate\n"
         );
     }
@@ -115,7 +115,7 @@ public class BoostersGeneratorUtilityAcceptanceTest extends AbstractAcceptanceTe
         given(settings.getCollectionPath()).willReturn(getPath("/playingset/generator/card-collection-few-cards.csv"));
 
         // When
-        main.run("booster-generator", "1");
+        main.run("generate-booster", "1");
 
         // Then an error is displayed
         verify(console).print(consoleArguments.capture());

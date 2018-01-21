@@ -32,7 +32,7 @@ Run the jar with:
     java -jar magic-the-gathering-utils-1.0.0.jar update-collection
         # Update your card collection
 
-    java -jar magic-the-gathering-utils-1.0.0.jar booster-generator <NumOfBoosters>
+    java -jar magic-the-gathering-utils-1.0.0.jar generate-booster <NumOfBoosters>
         # Generate some boosters that you can assemble to play with your friends
         # Booster are composed of 1 Mythic or Rare card, 3 Uncommon cards, 10 Uncommon cards, 1 Basic land.
 

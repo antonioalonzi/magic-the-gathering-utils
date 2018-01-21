@@ -40,12 +40,12 @@ public class BoostersGeneratorUtility extends AbstractUtility implements Utility
 
     @Override
     public String getCommand() {
-        return "booster-generator";
+        return "generate-booster";
     }
 
     @Override
     public String usage() {
-        return "  booster-generator <numOfBoosters>\n" +
+        return "  generate-booster <numOfBoosters>\n" +
                "     numOfBoosters: number of boosters to generate";
     }
 
