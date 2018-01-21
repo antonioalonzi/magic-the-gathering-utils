@@ -6,13 +6,15 @@ import org.junit.Test;
 import utils.Cards;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.shazam.shazamcrest.MatcherAssert.assertThat;
+import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 
 public class CardsListCsvParserTest {
 
     @Test
-    public void shouldLoadExportedCardsFromDeckbox() throws Exception {
+    public void shouldLoadExportedCardsFromDeckbox() {
         // given
         InputStream fileInputStream = CardsListCsvParserTest.class.getResourceAsStream("/deckbox/parser/extracted-file.csv");
 
@@ -20,31 +22,31 @@ public class CardsListCsvParserTest {
         CardsCollection cardsCollection = new CardsListCsvParser().parse(fileInputStream);
 
         // then
-        assertThat(cardsCollection.getcardsList()).containsExactly(
-                Cards.ABBOT_OF_KERAL_KEEP,
-                Cards.ACCURSED_SPIRIT,
-                Cards.ACT_OF_TREASON,
-                Cards.ACT_OF_TREASON,
-                Cards.ACT_OF_TREASON,
-                Cards.ACT_OF_TREASON,
-                Cards.ACT_OF_TREASON,
-                Cards.DWYEN_GILT_LEAF_DEAN,
-                Cards.FIELD_CREEPER,
-                Cards.HANGARBACK_WALKER,
-                Cards.SKYRIDER_ELF,
-                Cards.SIEGECRAFT,
-                Cards.TAMIYO_FIELD_RESEARCHER,
-                Cards.SWELL_OF_GROWTH,
-                Cards.SWELL_OF_GROWTH,
-                Cards.SWELL_OF_GROWTH,
-                Cards.SWELL_OF_GROWTH,
-                Cards.SWAMP,
-                Cards.SWAMP,
-                Cards.SWAMP,
-                Cards.SWAMP,
-                Cards.SWAMP,
-                Cards.TEMPLE_OF_DECEIT
-        );
+        ArrayList<Object> expectedCardList = new ArrayList<>();
+        expectedCardList.add(Cards.ABBOT_OF_KERAL_KEEP);
+        expectedCardList.add(Cards.ACCURSED_SPIRIT);
+        expectedCardList.add(Cards.ACT_OF_TREASON);
+        expectedCardList.add(Cards.ACT_OF_TREASON);
+        expectedCardList.add(Cards.ACT_OF_TREASON);
+        expectedCardList.add(Cards.ACT_OF_TREASON);
+        expectedCardList.add(Cards.ACT_OF_TREASON);
+        expectedCardList.add(Cards.DWYEN_GILT_LEAF_DEAN);
+        expectedCardList.add(Cards.FIELD_CREEPER);
+        expectedCardList.add(Cards.HANGARBACK_WALKER);
+        expectedCardList.add(Cards.SKYRIDER_ELF);
+        expectedCardList.add(Cards.SIEGECRAFT);
+        expectedCardList.add(Cards.TAMIYO_FIELD_RESEARCHER);
+        expectedCardList.add(Cards.SWELL_OF_GROWTH);
+        expectedCardList.add(Cards.SWELL_OF_GROWTH);
+        expectedCardList.add(Cards.SWELL_OF_GROWTH);
+        expectedCardList.add(Cards.SWELL_OF_GROWTH);
+        expectedCardList.add(Cards.SWAMP);
+        expectedCardList.add(Cards.SWAMP);
+        expectedCardList.add(Cards.SWAMP);
+        expectedCardList.add(Cards.SWAMP);
+        expectedCardList.add(Cards.SWAMP);
+        expectedCardList.add(Cards.TEMPLE_OF_DECEIT);
+        assertThat(cardsCollection.getcardsList(), sameBeanAs(expectedCardList));
     }
 
 }

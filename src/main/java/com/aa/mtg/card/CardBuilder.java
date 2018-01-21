@@ -11,13 +11,14 @@ public class CardBuilder {
     private String name;
     private List<Type> types = new ArrayList<>();
     private Rarity rarity;
+    private Edition edition;
 
     public static CardBuilder cardBuilder() {
         return new CardBuilder();
     }
 
     public Card build() {
-        return new Card(name, types, rarity);
+        return new Card(name, types, rarity, edition);
     }
 
     public CardBuilder name(String name) {
@@ -75,6 +76,16 @@ public class CardBuilder {
                 this.rarity = rarityValue;
             }
         }
+        return this;
+    }
+
+    public CardBuilder edition(Edition edition) {
+        this.edition = edition;
+        return this;
+    }
+
+    public CardBuilder edition(String edition) {
+        this.edition = new Edition(edition);
         return this;
     }
 }

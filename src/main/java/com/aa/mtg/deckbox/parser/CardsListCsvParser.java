@@ -38,6 +38,7 @@ public class CardsListCsvParser implements CardsListParser {
         for (CSVRecord record : records) {
             Card card = cardBuilder()
                     .name(record.get(2))
+                    .edition(record.get(3))
                     .typesFromString(record.get(15))
                     .rarity(record.get(17))
                     .build();

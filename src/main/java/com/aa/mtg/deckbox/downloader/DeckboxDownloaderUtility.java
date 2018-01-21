@@ -36,7 +36,7 @@ public class DeckboxDownloaderUtility extends AbstractUtility implements Utility
     public void run(List<String> args) throws HandledException {
         try {
             String deckboxId = settings.getDeckboxId();
-            URL website = new URL("https://deckbox.org/sets/export/" + deckboxId +"?format=csv&columns=Type,Cost,Rarity");
+            URL website = new URL("https://deckbox.org/sets/export/" + deckboxId +"?format=csv&columns=Type,Cost,Rarity,Price,Image+URL,Last+Updated");
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
             FileOutputStream fos = new FileOutputStream(settings.getCollectionPath());
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
