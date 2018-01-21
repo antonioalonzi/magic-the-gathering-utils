@@ -135,10 +135,10 @@ public class BoostersGeneratorUtilityAcceptanceTest extends AbstractAcceptanceTe
         assertThat(consoleArguments.getValue()).isEqualTo(
                 "numOfBoosters must be a positive number.\n" +
                         "Usage: \n" +
-                        "  generate-booster <numOfBoosters> <edition>\n" +
+                        "  generate-booster <numOfBoosters> <editions>\n" +
                         "     numOfBoosters: number of boosters to generate    (default 1)\n" +
-                        "     edition: list of editions comma separated\n" +
-                        "              eg. \"Magic Origins, Eldritch Moon\"    (default all editions)\n"
+                        "     editions: list of editions comma separated\n" +
+                        "               eg. \"Magic Origins, Eldritch Moon\"    (default all editions)\n"
         );
     }
 

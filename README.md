@@ -24,7 +24,8 @@ To run the application download the latest jar from [release page](https://githu
 Run the jar with:
 
     java -jar magic-the-gathering-utils-1.1.0.jar link-to-deckbox <YourDeckboxId>
-        # Link the app to deckbox (YourDeckboxId is the number in deckbox url)
+        # Link the app to deckbox
+        # YourDeckboxId: is the number in deckbox url
 
     java -jar magic-the-gathering-utils-1.1.0.jar show-link-to-deckbox
         # Display your deckbox id
@@ -32,9 +33,11 @@ Run the jar with:
     java -jar magic-the-gathering-utils-1.1.0.jar update-collection
         # Update your card collection
 
-    java -jar magic-the-gathering-utils-1.1.0.jar generate-booster <NumOfBoosters>
+    java -jar magic-the-gathering-utils-1.1.0.jar generate-booster [NumOfBoosters] [editions]
         # Generate some boosters that you can assemble to play with your friends
         # Booster are composed of 1 Mythic or Rare card, 3 Uncommon cards, 10 Uncommon cards, 1 Basic land.
+        # NumOfBoosters: number of boosters to generate
+        # edition: list of editions comma separated (eg. "Kaladesh,Aether Revolt"  -  default all editions)
 
 
 

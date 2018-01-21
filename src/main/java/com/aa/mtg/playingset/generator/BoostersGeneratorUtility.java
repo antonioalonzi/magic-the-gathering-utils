@@ -49,10 +49,10 @@ public class BoostersGeneratorUtility extends AbstractUtility implements Utility
 
     @Override
     public String usage() {
-        return "  generate-booster <numOfBoosters> <edition>\n" +
+        return "  generate-booster <numOfBoosters> <editions>\n" +
                "     numOfBoosters: number of boosters to generate    (default 1)\n" +
-               "     edition: list of editions comma separated\n" +
-               "              eg. \"Magic Origins, Eldritch Moon\"    (default all editions)";
+               "     editions: list of editions comma separated\n" +
+               "               eg. \"Magic Origins, Eldritch Moon\"    (default all editions)";
     }
 
     @Override
